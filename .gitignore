@@ -1,0 +1,51 @@
+# === Secrets — never commit ===
+.env
+.env.*
+*.token
+*.key
+.git-credentials
+
+# === Python ===
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# === Node ===
+node_modules/
+
+# === Build artifacts ===
+build/
+*.tmp
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Exclude everything not part of the deliverable ===
+# The book project is self-contained: public/ + download/ + scripts/ + README + vercel.json
+# Everything else (skills/, repos/, fonts/, tool-results/, upload/, worklog.md) is excluded.
+
+# Exclude cloned reference repo
+repos/
+
+# Exclude all skills (these are tool skills, not part of the book)
+skills/
+
+# Exclude fonts cache (downloaded CSS for inspection)
+fonts/
+
+# Exclude worklog (internal log)
+worklog.md
+
+# Exclude tool-results & upload (internal)
+tool-results/
+upload/
+
+# Keep deliverables and source
+!public/
+!public/**
+!download/
+!download/**
+!scripts/
+!scripts/build_book.py

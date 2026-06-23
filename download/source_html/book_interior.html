@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>انتروبيا الحنين — شذى ياسر الجوبحي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;700&family=Reem+Kufi:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================================
+   انتروبيا الحنين — Interior Typesetting
+   Literary Editorial · Quiet Luxury · Cosmic Nostalgia
+   Page: 6×9 inch (152×229 mm) + 3mm bleed = 158×235 mm = 448.46×665.20 pt
+   For Paged.js / Chromium @page (we use px: 448.46pt ≈ 597.95px at 96dpi,
+   but Playwright uses CSS px directly. We define in mm for print fidelity.)
+   ========================================================================= */
+
+@page {
+  size: 158mm 235mm;          /* 6×9" + 3mm bleed each side */
+  margin: 0;
+}
+
+@page :first {
+  margin: 0;
+}
+
+:root {
+  /* Palette — warm parchment interior */
+  --bg:        #F4F1EA;        /* parchment cream */
+  --bg-soft:   #EFEBE1;        /* slightly deeper */
+  --ink:       #1B1A17;        /* warm near-black */
+  --ink-soft:  #4A463E;        /* secondary text */
+  --ink-mute:  #8A847A;        /* captions, folios */
+  --rule:      #D9D3C5;        /* hairlines */
+  --brass:     #8C6B3F;        /* faded-brass accent */
+  --brass-soft:#B89968;        /* lighter brass */
+  --night:     #0E1116;        /* cover night */
+
+  /* Type families */
+  --f-display: 'Reem Kufi', 'IBM Plex Sans Arabic', serif;
+  --f-head:    'IBM Plex Sans Arabic', 'Noto Naskh Arabic', sans-serif;
+  --f-body:    'Noto Naskh Arabic', 'IBM Plex Sans Arabic', serif;
+  --f-quote:   'Amiri', 'Noto Naskh Arabic', serif;
+}
+
+/* Global reset */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 12pt;
+  line-height: 1.8;
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Screen preview helper — keeps page visible */
+@media screen {
+  html {
+    background: #2a2826;
+    display: flex;
+    justify-content: center;
+  }
+  body {
+    background: var(--bg);
+    margin: 24px auto;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+  }
+}
+
+/* ===========================================================
+   PAGE FRAME
+   The interior content lives inside a content frame with
+   generous margins. Bleed area is already in @page size.
+   For print we use CSS @page margin-boxes via Paged.js, but
+   here we simulate using padding on each .page wrapper.
+   =========================================================== */
+
+/* Each logical "page" of the book is a .page block.
+   For Paged.js we let content flow; for explicit pages
+   (cover-like front matter, chapter openers) we use
+   break-before: page + fixed height to fill the page. */
+
+.page {
+  width: 158mm;
+  height: 235mm;
+  min-height: 235mm;
+  padding: 24mm 22mm 22mm 22mm;   /* top, inner, bottom, outer — symmetric for front matter */
+  position: relative;
+  break-after: page;
+  page-break-after: always;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* Body content pages use asymmetric margins (gutter larger) */
+.page.body-page {
+  padding: 22mm 18mm 22mm 26mm;   /* outer 18, inner 26 (gutter) — for print binding */
+}
+
+/* Running header (chapter title) and footer (folio) */
+.running-header {
+  position: absolute;
+  top: 12mm;
+  inset-inline-start: 22mm;
+  inset-inline-end: 22mm;
+  font-family: var(--f-head);
+  font-size: 8.5pt;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 0.4pt solid var(--rule);
+  padding-bottom: 2mm;
+}
+.running-header .rh-left { font-weight: 500; }
+.running-header .rh-right { font-style: italic; font-family: var(--f-quote); }
+
+.folio {
+  position: absolute;
+  bottom: 12mm;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  text-align: center;
+  font-family: var(--f-head);
+  font-size: 9pt;
+  font-weight: 300;
+  color: var(--ink-mute);
+  letter-spacing: 0.1em;
+}
+
+/* ===========================================================
+   BLANK PAGE
+   =========================================================== */
+.page-blank { background: var(--bg); }
+
+/* ===========================================================
+   TITLE PAGE
+   =========================================================== */
+.page-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 36mm 26mm;
+}
+.title-publisher {
+  font-family: var(--f-head);
+  font-size: 9pt;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.title-main {
+  font-family: var(--f-display);
+  font-size: 48pt;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: 0;
+}
+.title-sub {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 14pt;
+  color: var(--ink-soft);
+  margin-top: 6mm;
+  letter-spacing: 0.02em;
+}
+.title-rule {
+  width: 28mm;
+  height: 0.6pt;
+  background: var(--brass);
+  margin: 14mm auto;
+}
+.title-author {
+  font-family: var(--f-head);
+  font-size: 13pt;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.06em;
+}
+.title-author-role {
+  font-family: var(--f-body);
+  font-size: 10pt;
+  color: var(--ink-mute);
+  margin-top: 2mm;
+}
+.title-meta {
+  font-family: var(--f-head);
+  font-size: 8.5pt;
+  font-weight: 300;
+  color: var(--ink-mute);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* ===========================================================
+   COPYRIGHT PAGE
+   =========================================================== */
+.page-copyright {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 60mm 26mm 28mm;
+}
+.copyright-block {
+  font-family: var(--f-head);
+  font-size: 9pt;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  direction: rtl;
+}
+.copyright-block .cr-line { margin: 1mm 0; }
+.copyright-block .cr-strong { color: var(--ink); font-weight: 500; }
+.copyright-block .cr-rule {
+  width: 18mm;
+  height: 0.4pt;
+  background: var(--rule);
+  margin: 4mm auto;
+}
+.copyright-block .cr-isbn {
+  font-family: var(--f-head);
+  font-weight: 300;
+  font-size: 8.5pt;
+  color: var(--ink-mute);
+  letter-spacing: 0.15em;
+}
+.copyright-block .cr-contact {
+  font-family: var(--f-head);
+  font-size: 9pt;
+  color: var(--ink);
+  direction: ltr;
+  unicode-bidi: isolate;
+  margin-top: 2mm;
+}
+
+/* ===========================================================
+   DEDICATION PAGE
+   =========================================================== */
+.page-dedication {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50mm 30mm;
+}
+.dedication-mark {
+  width: 8mm;
+  height: 8mm;
+  margin-bottom: 14mm;
+  opacity: 0.7;
+}
+.dedication-text {
+  font-family: var(--f-quote);
+  font-size: 13pt;
+  line-height: 2.0;
+  color: var(--ink);
+  font-style: italic;
+  max-width: 100mm;
+}
+.dedication-text .line { display: block; }
+.dedication-text .line + .line { margin-top: 1.5mm; }
+.dedication-text .line-bold { font-weight: 700; font-style: normal; }
+.dedication-coda {
+  font-family: var(--f-display);
+  font-size: 11pt;
+  color: var(--brass);
+  margin-top: 14mm;
+  letter-spacing: 0.08em;
+}
+.dedication-sign {
+  font-family: var(--f-head);
+  font-size: 9pt;
+  color: var(--ink-mute);
+  margin-top: 6mm;
+  letter-spacing: 0.2em;
+}
+
+/* ===========================================================
+   PREFACE PAGE
+   =========================================================== */
+.page-preface {
+  padding: 30mm 24mm 22mm;
+}
+.preface-epigraph {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 13pt;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  text-align: center;
+  max-width: 110mm;
+  margin: 0 auto 14mm;
+  padding: 0 6mm;
+}
+.preface-epigraph::before,
+.preface-epigraph::after {
+  content: "";
+  display: block;
+  width: 14mm;
+  height: 0.4pt;
+  background: var(--brass);
+  margin: 6mm auto;
+}
+.preface-title {
+  font-family: var(--f-display);
+  font-size: 14pt;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin: 0 0 10mm;
+}
+.preface-body p {
+  font-family: var(--f-body);
+  font-size: 12pt;
+  line-height: 1.95;
+  color: var(--ink);
+  text-align: justify;
+  text-justify: inter-word;
+  margin: 0 0 4mm;
+  text-indent: 6mm;
+  orphans: 3;
+  widows: 3;
+}
+.preface-body p.no-indent { text-indent: 0; }
+.preface-sign {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 11pt;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 12mm;
+  line-height: 1.7;
+}
+.preface-sign .sig-name {
+  display: block;
+  font-family: var(--f-display);
+  font-style: normal;
+  font-size: 13pt;
+  color: var(--brass);
+  margin-bottom: 1mm;
+}
+
+/* ===========================================================
+   TABLE OF CONTENTS
+   =========================================================== */
+.page-toc {
+  padding: 32mm 24mm 22mm;
+}
+.toc-title {
+  font-family: var(--f-display);
+  font-size: 24pt;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin: 0 0 16mm;
+}
+.toc-title::after {
+  content: "";
+  display: block;
+  width: 22mm;
+  height: 0.5pt;
+  background: var(--brass);
+  margin: 6mm auto 0;
+}
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--f-head);
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  font-size: 12pt;
+  color: var(--ink);
+  padding: 4mm 0;
+  border-bottom: 0.3pt solid var(--rule);
+}
+.toc-entry .toc-num {
+  font-family: var(--f-display);
+  font-size: 13pt;
+  font-weight: 600;
+  color: var(--brass);
+  width: 16mm;
+  flex-shrink: 0;
+}
+.toc-entry .toc-text {
+  flex: 1;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--ink);
+}
+.toc-entry .toc-dots {
+  flex: 0 0 auto;
+  border-bottom: 0.6pt dotted var(--ink-mute);
+  margin: 0 3mm;
+  min-width: 12mm;
+  align-self: stretch;
+  position: relative;
+  top: -2pt;
+}
+.toc-entry .toc-page {
+  font-family: var(--f-head);
+  font-size: 11pt;
+  font-weight: 400;
+  color: var(--ink-soft);
+  min-width: 10mm;
+  text-align: left;
+  direction: ltr;
+}
+.toc-entry a { color: inherit; text-decoration: none; }
+
+/* ===========================================================
+   CHAPTER OPENER PAGE
+   =========================================================== */
+.page-chapter-opener {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  position: relative;
+  break-before: page;
+  page-break-before: always;
+  height: 235mm;            /* explicit full page height so flex content centers */
+  min-height: 235mm;
+}
+.chapter-ghost-num {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-family: var(--f-display);
+  font-size: 280pt;
+  font-weight: 600;
+  color: var(--brass);
+  opacity: 0.08;
+  line-height: 1;
+  z-index: 0;
+  direction: ltr;
+  letter-spacing: -0.04em;
+}
+.chapter-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130mm;
+  height: 130mm;
+  z-index: 0;
+  opacity: 0.35;
+}
+.chapter-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.chapter-label {
+  font-family: var(--f-head);
+  font-size: 9pt;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 8mm;
+}
+.chapter-num-small {
+  font-family: var(--f-display);
+  font-size: 18pt;
+  font-weight: 500;
+  color: var(--ink-mute);
+  letter-spacing: 0.2em;
+  margin-bottom: 4mm;
+  direction: ltr;
+}
+.chapter-title {
+  font-family: var(--f-display);
+  font-size: 30pt;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.25;
+  max-width: 110mm;
+  margin: 6mm auto 10mm;
+  letter-spacing: 0;
+}
+.chapter-title-rule {
+  width: 24mm;
+  height: 0.6pt;
+  background: var(--brass);
+  margin: 0 auto 10mm;
+}
+.chapter-epigraph {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 11pt;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 90mm;
+  margin: 0 auto;
+}
+
+/* ===========================================================
+   CHAPTER BODY (flowing text)
+   =========================================================== */
+.chapter-body {
+  padding: 22mm 18mm 22mm 26mm;   /* gutter on inner side */
+  font-family: var(--f-body);
+  break-before: page;
+  page-break-before: always;
+}
+.chapter-body p {
+  font-family: var(--f-body);
+  font-size: 12pt;
+  line-height: 1.85;
+  color: var(--ink);
+  text-align: justify;
+  text-justify: inter-word;
+  margin: 0 0 3.5mm;
+  text-indent: 6mm;
+  orphans: 3;
+  widows: 3;
+}
+.chapter-body p.first-para {
+  text-indent: 0;
+}
+.chapter-body p.no-indent { text-indent: 0; }
+
+/* Drop-cap-ish first letter for chapter opening (subtle) */
+.chapter-body p.first-para::first-letter {
+  font-family: var(--f-display);
+  font-size: 32pt;
+  font-weight: 600;
+  color: var(--brass);
+  float: right;          /* RTL: cap on the right */
+  line-height: 0.9;
+  margin: 2mm 0 0 3mm;
+  padding: 0;
+}
+
+/* Scene break — small orbital glyph */
+.scene-break {
+  text-align: center;
+  margin: 6mm 0 6mm;
+  break-inside: avoid;
+}
+.scene-break svg {
+  width: 14mm;
+  height: 4mm;
+  opacity: 0.5;
+}
+
+/* Letter / quote from father — distinct treatment */
+.passage-letter {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 11.5pt;
+  line-height: 1.95;
+  color: var(--ink-soft);
+  background: var(--bg-soft);
+  border-inline-start: 1.5pt solid var(--brass);
+  padding: 5mm 7mm;
+  margin: 5mm 0;
+  text-align: justify;
+  text-indent: 0;
+  break-inside: avoid;
+}
+.passage-letter p {
+  text-indent: 0;
+  margin: 0 0 2mm;
+  font-style: italic;
+}
+.passage-letter p:last-child { margin-bottom: 0; }
+
+/* Whispered / philosophical lines — centered, lighter */
+.passage-whisper {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 12pt;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 5mm auto;
+  max-width: 95mm;
+  padding: 0 4mm;
+  break-inside: avoid;
+}
+
+/* Father's direct voice — slight emphasis, no container */
+.passage-voice {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 12pt;
+  line-height: 1.85;
+  color: var(--ink);
+  margin: 3mm 0;
+  text-indent: 0;
+  padding-inline-start: 5mm;
+  border-inline-start: 0.4pt solid var(--rule);
+}
+
+/* ===========================================================
+   PAGINATION RULES
+   =========================================================== */
+h1, h2, h3, .chapter-title, .preface-title, .toc-title {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+.passage-letter, .passage-whisper, .scene-break, figure {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Never start a chapter opener at the very bottom */
+.page-chapter-opener {
+  break-after: page;
+  page-break-after: always;
+}
+
+/* Avoid orphan headings inside chapter body */
+.chapter-body h2, .chapter-body h3 {
+  break-after: avoid;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PAGE 1 — BLANK FLYLEAF
+     ============================================================ -->
+<div class="page page-blank"></div>
+
+<!-- ============================================================
+     PAGE 2 — TITLE PAGE
+     ============================================================ -->
+<div class="page page-title">
+  <div class="title-publisher">رواية · ٢٠٢٦</div>
+
+  <div>
+    <h1 class="title-main">انتروبيا الحنين</h1>
+    <div class="title-sub">رواية</div>
+    <div class="title-rule"></div>
+    <div class="title-author">شذى ياسر الجوبحي</div>
+    <div class="title-author-role">اليمن</div>
+  </div>
+
+  <div class="title-meta">الطبعة الأولى</div>
+</div>
+
+<!-- ============================================================
+     PAGE 3 — COPYRIGHT
+     ============================================================ -->
+<div class="page page-copyright">
+  <div class="copyright-block">
+    <div class="cr-line cr-strong">انتروبيا الحنين</div>
+    <div class="cr-line">رواية</div>
+    <div class="cr-rule"></div>
+    <div class="cr-line">تأليف: <span class="cr-strong">شذى ياسر الجوبحي</span></div>
+    <div class="cr-line">اليمن</div>
+    <div class="cr-rule"></div>
+    <div class="cr-line">الطبعة الأولى · ٢٠٢٦</div>
+    <div class="cr-line">جميع الحقوق محفوظة للمؤلفة</div>
+    <div class="cr-line">يمنع النسخ أو الاقتباس دون إذن خطّي</div>
+    <div class="cr-rule"></div>
+    <div class="cr-line">التصميم والإخراج الفني:</div>
+    <div class="cr-line cr-strong">استوديو الإخراج الأدبي</div>
+    <div class="cr-rule"></div>
+    <div class="cr-line cr-contact">+967 775 863 594</div>
+    <div class="cr-isbn">ISBN · PENDING</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE 4 — DEDICATION (poetic standalone)
+     ============================================================ -->
+<div class="page page-dedication">
+  <svg class="dedication-mark" viewBox="0 0 24 24" fill="none" stroke="#8C6B3F" stroke-width="1.2">
+    <circle cx="12" cy="12" r="9"/>
+    <circle cx="12" cy="12" r="3" fill="#8C6B3F" stroke="none"/>
+    <line x1="12" y1="0" x2="12" y2="6"/>
+    <line x1="12" y1="18" x2="12" y2="24"/>
+    <line x1="0" y1="12" x2="6" y2="12"/>
+    <line x1="18" y1="12" x2="24" y2="12"/>
+  </svg>
+
+  <div class="dedication-text">
+    <span class="line">إلى أبي، معلم الفيزياء الأول: <span class="line-bold">ياسر</span></span>
+    <span class="line">أنت من علّمني أن الطاقة حنانٌ لا يفنى،</span>
+    <span class="line">فوددت لو أحيلك حبرًا كي لا تفنى.</span>
+    <span class="line">فشكرًا لأنك كنت الثابت الوحيد</span>
+    <span class="line">في كل معادلاتي المضطربة.</span>
+    <span class="line">&nbsp;</span>
+    <span class="line">ولأمي النقية <span class="line-bold">لينا</span>،</span>
+    <span class="line">الجاذبية التي لا تتركني أضيع،</span>
+    <span class="line">والمدار الذي أعود إليه كلما أفلتّ مني.</span>
+    <span class="line">&nbsp;</span>
+    <span class="line">ولأخويّ <span class="line-bold">عمار</span> و<span class="line-bold">عبدالله</span>،</span>
+    <span class="line">النبض والاتزان في معادلة عمري.</span>
+  </div>
+
+  <div class="dedication-coda">معكم صِرتُ نظامًا لا يفنى،<br>حبّه ثابتٌ وطاقته لا تنضب.</div>
+  <div class="dedication-sign">شذى ياسر</div>
+</div>
+
+<!-- ============================================================
+     PAGE 5 — PREFACE
+     ============================================================ -->
+<div class="page page-preface">
+  <div class="preface-epigraph">
+    لو كان الفقد قانونًا فيزيائيًا،<br>
+    لكان ينصّ على أن:<br>
+    لا شيء يُفنى، لكن كل شيء يتغيّر.
+  </div>
+
+  <h2 class="preface-title">مقدمة</h2>
+
+  <div class="preface-body">
+    <p class="no-indent">أنا شذى. وأنا لا أؤمن بالأكوان المتعددة لأنها ممتعة في أفلام مارفل. أؤمن بها لأنها الطريقة الوحيدة التي أستطيع بها أن أكتب أبي حيًا دائمًا.</p>
+
+    <p>في كونٍ ما، لم يمت. في كونٍ آخر، نسيتُه. وفي هذا الكون... أنا أكتب وهو يقرأني.</p>
+
+    <p>هذه ليست رواية خيال علمي، هذه محاولة يائسة لتحويل الحنان إلى معادلة، والغياب إلى ورق، والانهيار إلى لغة مفهومة!</p>
+
+    <p>اقرأها إن كنتَ فقدتَ أحدًا. أو إن كنتَ خائفًا أن تفقد. أو إن كنتَ، مثلي، تحاول أن تختار بين أن تتذكر... أو أن تعيش.</p>
+  </div>
+
+  <div class="preface-sign">
+    <span class="sig-name">شذى</span>
+    الكون: الأرض.<br>
+    الساعة ٣:١٧ فجرًا.
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE 6 — TABLE OF CONTENTS
+     ============================================================ -->
+<div class="page page-toc">
+  <h2 class="toc-title">المحتويات</h2>
+
+  <ul class="toc-list">
+    <li class="toc-entry">
+      <span class="toc-num">٠١</span>
+      <a class="toc-text" href="#chapter-1">الكف التي لا تتحلل</a>
+      <span class="toc-dots"></span>
+      <span class="toc-page">9</span>
+    </li>
+    <li class="toc-entry">
+      <span class="toc-num">٠٢</span>
+      <a class="toc-text" href="#chapter-2">الخط ٤٤ — حيث لم أُولد</a>
+      <span class="toc-dots"></span>
+      <span class="toc-page">19</span>
+    </li>
+    <li class="toc-entry">
+      <span class="toc-num">٠٣</span>
+      <a class="toc-text" href="#chapter-3">الخط ١٢ — المعادلة المعكوسة</a>
+      <span class="toc-dots"></span>
+      <span class="toc-page">31</span>
+    </li>
+  </ul>
+</div>
+
+<!-- ============================================================
+     PAGE 7 — CHAPTER 1 OPENER
+     ============================================================ -->
+<div class="page page-chapter-opener" id="chapter-1">
+  <div class="chapter-ghost-num">01</div>
+
+  <svg class="chapter-orbit" viewBox="0 0 200 200" fill="none" stroke="#8C6B3F" stroke-width="0.3">
+    <circle cx="100" cy="100" r="95"/>
+    <circle cx="100" cy="100" r="72"/>
+    <circle cx="100" cy="100" r="48"/>
+    <ellipse cx="100" cy="100" rx="95" ry="40" transform="rotate(15 100 100)"/>
+    <ellipse cx="100" cy="100" rx="95" ry="40" transform="rotate(-25 100 100)"/>
+    <circle cx="100" cy="5" r="2" fill="#8C6B3F" stroke="none"/>
+    <circle cx="172" cy="100" r="1.5" fill="#8C6B3F" stroke="none"/>
+    <circle cx="55" cy="148" r="1" fill="#8C6B3F" stroke="none"/>
+  </svg>
+
+  <div class="chapter-content">
+    <div class="chapter-label">الفصل الأول</div>
+    <div class="chapter-num-small">01</div>
+    <h2 class="chapter-title">الكف التي لا تتحلل</h2>
+    <div class="chapter-title-rule"></div>
+    <div class="chapter-epigraph">
+      «لا شيء يُفنى، لكن كل شيء يتغيّر —<br>
+      حتى الكفّ التي ضغطت أخيرًا،<br>
+      تبقى أثرًا لا يتحلل.»
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER 1 BODY
+     ============================================================ -->
+<div class="chapter-body">
+
+<p class="first-para">مات أبي دون أن يقول لي «لا تبكي» كعادته. كأن الموت نفسه أدرك أنه لو قالها لسقطتُ من عينيه، فسكتَ. سكتَ وترك يده على كفي كمن يترك وطنًا قبل أن يُمحى من الخرائط.</p>
+
+<p>ضغطةٌ واحدة، أخيرة، ماكرة… فيها كل ما لم يقله في سنوات عمره. قالت: أنا هنا. وقالت: ولو لم أعد هنا، فأنا هنا.</p>
+
+<p>وأنا، التي تعلمتُ منه أن الأشياء لا تفنى، صدّقته. صدّقته وصدّقتُ أن الكفّ إذا ضغطت هكذا، فإنها لا تتحلل.</p>
+
+<div class="scene-break">
+  <svg viewBox="0 0 60 12" fill="none" stroke="#8C6B3F" stroke-width="0.6">
+    <circle cx="6" cy="6" r="1.5"/>
+    <line x1="14" y1="6" x2="26" y2="6"/>
+    <circle cx="30" cy="6" r="2"/>
+    <line x1="34" y1="6" x2="46" y2="6"/>
+    <circle cx="54" cy="6" r="1.5"/>
+  </svg>
+</div>
+
+<p class="no-indent">مرّت أربعون يومًا كأربعين شتاءً على غرفةٍ واحدة. غرفةٌ لم تُفتح منذ مات. كنتُ أمرّ من أمام بابها فأشمّ الرائحة من تحت الشقّ، وأمضي. رائحةٌ لا تُنسى ولا تُحتمل: شايٌ بات في الكوب حتى صار طقسًا، حبرٌ جفّ على كتبه فصار وشمًا، وزيتُ آلةٍ حاسبةٍ كان يمسحها لطلابه مجانًا كملاكٍ يمسح ذنوبًا لا تخصّه.</p>
+
+<p>في الليلة الأربعين لم أنم. جلستُ على عتبة الباب أعدّ أنفاسي. وكلّما هممتُ بالرحيل، سمعتُ صوته في رأسي يقول:</p>
+
+<div class="passage-voice">
+«دُجى، الفيزياء ليست صعبة، وهي لا تهرب منكِ، أنتِ التي تهربين منها.»
+</div>
+
+<p class="no-indent">فنهضتُ وفتحتُ الباب.</p>
+
+<p>الظلام لم يخفني. الذي أخافني أن كل شيء بقي على حاله. الكرسي المائل الذي كان يجلس عليه. النظارة التي سقطت منه ولم يعد ليكمل إصلاحها. السبورة الصغيرة التي كتب عليها ذات ليلة:</p>
+
+<div class="passage-voice">
+«دُجى = ٩.٨ م/ث² نحو قلبي.»
+</div>
+
+<p class="no-indent">تحت السرير كان الصندوق. معدنيٌّ، باردٌ، صامتٌ كضميرٍ لم يُستخدم بعد. فتحته وأنا أتوقع وصيةً. فوجدتُ دفترًا أزرق. وعلى الغلاف، بخطّه الذي أحفظه أكثر من خطّي:</p>
+
+<div class="passage-letter">
+  <p>«لدُجى، إذا قرأتِ هذا، فاعلمي أنني لم أترككِ أبدًا.»</p>
+</div>
+
+<p class="no-indent">فتحتُ الصفحة الأولى، فانفجرت في وجهي الجملة:</p>
+
+<div class="passage-letter">
+  <p>«يا ابنتي، أنا لم أمُت.</p>
+  <p>أنا فقط انتقلتُ إلى كونٍ آخر لأصلح فيه الأشياء التي كسرتها هنا!»</p>
+</div>
+
+<p>ضحكتُ. ضحكةٌ مشبعةٌ بالملح.</p>
+
+<p>«حتى بعد الموت ما زلت تعلّمني يا أبي؟» قلتها بصوتٍ مسموع، كأنني أخاطب الهواء. الهواء لم يرد. لكن الورقة التالية ردّت.</p>
+
+<p>دائرة يتفرّع منها مئةُ خطّ. وتحت الدائرة:</p>
+
+<div class="passage-letter">
+  <p>«كل خطٍّ كونٌ. اختاري خطًّا.</p>
+  <p>لكن اعلمي: كلّما دخلتِ كونًا، نسيتِ شيئًا من هذا الكون.»</p>
+</div>
+
+<p class="no-indent">«أأنساك؟» همستُ للورق. أغلقتُ الدفتر بسرعة، كأنني أغلق فمًا نطق بالخيانة.</p>
+
+<p>وفي تلك اللحظة انفتح باب الغرفة. دخل حازم.</p>
+
+<p>«أبي مات.» قلتها قبل أن يُسلم. قلتها بصلابةِ من تحمي الميتَ من الموتى.</p>
+
+<p>فوقف عند الباب ولم يتقدّم.</p>
+
+<div class="passage-voice">
+«أعرف. هو قال لي: إن جاءت دُجى تفتح الدفتر، فقل لها إن الحنين يسرق العقل. وإن أصرّت، فامشِ معها، حتى لا تضيع وحدها.»
+</div>
+
+<p class="no-indent">«ومن أنت حتى تمشي معي؟»</p>
+
+<div class="passage-voice">
+«كنتُ طالبَه. فشلتُ في الفيزياء، فنجحتُ في أن أكون شاهدًا على ما لم يقدر أن يقوله لكِ.»
+</div>
+
+<p class="no-indent">جلستُ على الأرض. الوقوف صار خيانة للجاذبية التي علّمني إياها.</p>
+
+<p>«لماذا تمنعني؟»</p>
+
+<div class="passage-voice">
+«لأن أباكِ حنونٌ يا دُجى. أكثر مما تحتملين. وفي بعض الأكوان، حنانه كسركِ أكثر من قسوةِ أبٍ آخر.»
+</div>
+
+<p class="no-indent">صمتُّ. أصابعي عادت للدفتر. عيني على الخطّ رقم سبعة.</p>
+
+<p>«لو اخترتُ، هل سأرجع؟»</p>
+
+<div class="passage-voice">
+«سترجعين. لكنكِ لن تكوني أنتِ.»
+</div>
+
+<p class="no-indent">لمست الخط قبل أن يقول أي شيء واخترتُ.</p>
+
+<p>فذابت الغرفة. واستيقظتُ على صوت أبي:</p>
+
+<div class="passage-voice">
+«صباح الخير يا دُجى. تأخرتِ على الامتحان.»
+</div>
+
+<p class="no-indent">فتحتُ عيني فوجدته حيًا. أصغرَ بعشرِ سنوات. يمدّ لي كوب الشاي كما كان يفعل كل صباح.</p>
+
+<div class="passage-voice">
+«شربتِ؟ لا. إذن اشربي. الفيزياء لا تُفهم على معدةٍ فارغة.»
+</div>
+
+<p class="no-indent">ركضتُ إليه. ضمّني. ولم يسأل لماذا أبكي. قال على أذني:</p>
+
+<div class="passage-voice">
+«أنا هنا. لن أترككِ تسقطين مرةً أخرى.»
+</div>
+
+<div class="scene-break">
+  <svg viewBox="0 0 60 12" fill="none" stroke="#8C6B3F" stroke-width="0.6">
+    <circle cx="6" cy="6" r="1.5"/>
+    <line x1="14" y1="6" x2="26" y2="6"/>
+    <circle cx="30" cy="6" r="2"/>
+    <line x1="34" y1="6" x2="46" y2="6"/>
+    <circle cx="54" cy="6" r="1.5"/>
+  </svg>
+</div>
+
+<p class="no-indent">عشتُ ثلاثة أيامٍ في هذا الكون كمن وجد ماءً بعد عطش.</p>
+
+<p>في اليوم الأول، أصلح لي ساعتي التي انكسرت بعد يوم من شراءها.</p>
+
+<div class="passage-voice">
+«كنتُ أنتظر أن تطلبي.»
+</div>
+
+<p>قلتُ: «ولم تسأل؟»</p>
+
+<div class="passage-voice">
+«الأب لا يسأل. الأب يشعر ويرى.»
+</div>
+
+<p>في اليوم الثاني، جئتُه أبكي على مسألةٍ لم تُحل. جلس بجانبي على الأرض، وأمسك القلم بيده المرتعشة.</p>
+
+<div class="passage-voice">
+«انظري. المشكلة ليست في المعادلة. المشكلة أنكِ تريدين حلّها بسرعةٍ قبل أن تفهميها.»
+</div>
+
+<p class="no-indent">فبكيتُ أكثر. لأنني فهمتُ أنه يتكلم عني، لا عن المسألة.</p>
+
+<p>وفي اليوم الثالث، همس لي وهو يغطيني باللحاف:</p>
+
+<div class="passage-voice">
+«أنتِ أذكى من نيوتن، وأحنُّ من قانون الجاذبية.»
+</div>
+
+<p class="no-indent">فنمتُ تلك الليلة بلا حلم. لأن الحلم صار حقيقة، وخفتُ أن أصحو.</p>
+
+<div class="scene-break">
+  <svg viewBox="0 0 60 12" fill="none" stroke="#8C6B3F" stroke-width="0.6">
+    <circle cx="6" cy="6" r="1.5"/>
+    <line x1="14" y1="6" x2="26" y2="6"/>
+    <circle cx="30" cy="6" r="2"/>
+    <line x1="34" y1="6" x2="46" y2="6"/>
+    <circle cx="54" cy="6" r="1.5"/>
+  </svg>
+</div>
+
+<p class="no-indent">وفي اليوم الرابع وجدتُه يبكي. أول مرةٍ أرى فيها أبي يبكي. فانكسر في قانون ان الرجل لا يبكي.</p>
+
+<p>«ما بكَ يا أبي؟»</p>
+
+<p>رفع رأسه وقال:</p>
+
+<div class="passage-letter">
+  <p>«أنا لستُ أباكِ من هذا الكون.</p>
+  <p>أنا نسخةٌ هربتُ لأعطيكِ ما بخلتُ به هناك.</p>
+  <p>لكنّ كلّ دقيقةٍ معكِ هنا، تموتُ نسخةٌ منكِ هناك.»</p>
+</div>
+
+<p class="no-indent">«فلماذا جئت؟»</p>
+
+<div class="passage-letter">
+  <p>«لأنني أناني يا دُجى. أحبكِ لدرجةٍ أتمنى أن تموت كلّ النسخ الأخرى… لأبقى أنا الوحيد الذي يحتضنكِ الآن.»</p>
+</div>
+
+<p class="no-indent">هربتُ. ركضتُ من حضنه، من حنانه، من كذبته الجميلة. صحوتُ في غرفتي، والدفتر دافئٌ في حضني.</p>
+
+<p>وحازم قال:</p>
+
+<div class="passage-voice">
+«قلتُ لكِ. حنانه أخطرُ من أيّ شيء.»
+</div>
+
+<p class="no-indent">«ماذا حدث للكون؟»</p>
+
+<div class="passage-voice">
+«انهار. العالم لا يطيق الحقيقة المزدوجة يا دُجى. إمّا أن تكوني واحدة، أو لا تكوني.»
+</div>
+
+<p class="no-indent">سمعتُ صوت أبي الحقي من الفراغ:</p>
+
+<div class="passage-whisper">
+«دُجى، لا تبحثي عنّي في الأكوان.<br>
+ابحثي عنّي فيكِ.<br>
+الطاقة لا تفنى.<br>
+وأنا الآن طاقةٌ فيكِ.»
+</div>
+
+<p class="no-indent">أغلقتُ الدفتر. لكنني سمعتُ اسمي يُنادى من الخطّ رقم أربعة وأربعين:</p>
+
+<div class="passage-whisper">
+«دُجى، أنا لم أتزوج أمّكِ في هذا الكون.<br>
+لكنني أحببتُكِ قبل أن تولدي.»
+</div>
+
+</div>
+
+<!-- ============================================================
+     PAGE — CHAPTER 2 OPENER
+     ============================================================ -->
+<div class="page page-chapter-opener" id="chapter-2">
+  <div class="chapter-ghost-num">02</div>
+
+  <svg class="chapter-orbit" viewBox="0 0 200 200" fill="none" stroke="#8C6B3F" stroke-width="0.3">
+    <circle cx="100" cy="100" r="95"/>
+    <circle cx="100" cy="100" r="65"/>
+    <circle cx="100" cy="100" r="35"/>
+    <ellipse cx="100" cy="100" rx="95" ry="55" transform="rotate(40 100 100)"/>
+    <ellipse cx="100" cy="100" rx="95" ry="55" transform="rotate(-40 100 100)"/>
+    <circle cx="100" cy="5" r="1.8" fill="#8C6B3F" stroke="none"/>
+    <circle cx="135" cy="160" r="1.2" fill="#8C6B3F" stroke="none"/>
+  </svg>
+
+  <div class="chapter-content">
+    <div class="chapter-label">الفصل الثاني</div>
+    <div class="chapter-num-small">02</div>
+    <h2 class="chapter-title">الخط ٤٤<br>حيث لم أُولد</h2>
+    <div class="chapter-title-rule"></div>
+    <div class="chapter-epigraph">
+      «الحبّ ليس أن تكوني موجودة.<br>
+      الحبّ أحيانًا أن تختاري أن لا تكوني،<br>
+      ليسعد الآخر.»
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER 2 BODY
+     ============================================================ -->
+<div class="chapter-body">
+
+<p class="first-para">فتحتُ الدفتر على الخط ٤٤ وأنا أعرف أنني أفتح بابًا لن يُغلق. حازم مدّ يده ليوقفني، فأبعدتها بحركةٍ لا وعي فيها. أصابعي كانت أسرع من عقلي، وكأن جسدي سبقني إلى ما لا أريد أن أعرفه.</p>
+
+<p>قالها كمن يصرخ في وجه بحرٍ رأى أحدهم يرمي نفسه فيه:</p>
+
+<div class="passage-voice">
+«لا تدخلي يا دُجى! هذا الكون لا يرحم. هنا اختار أبوكِ أن يعيش بلا ذنب... على حسابكِ.»
+</div>
+
+<p class="no-indent">لم أسمعه. في داخلي ضجيجٌ أقدم من صوته، ضجيجٌ يقول: اذهبي وانظري ماذا فعل أبوكِ حين لم تكوني. اذهبي وافهمي لماذا كان ينظر إليكِ أحيانًا كمن ينظر إلى فراغٍ يحبه!</p>
+
+<p>ذابت الغرفة من جديد. ذاب الزمن، وذابت رائحة الحبر، وانهالت عليّ رائحة مطرٍ لم أعرفه من قبل. رائحة ترابٍ مبلل، وخبزٍ طازج، وشيءٍ يشبه العيد.</p>
+
+<p>فتحتُ عيني فوجدتني أمام بيتنا القديم، لكنه ليس بيتنا. بيتٌ مطليٌّ بالبياض كأنه غُسل من الذنوب. نوافذه نظيفة، ستائره زرقاء، والحديقة أمام الباب مرتبةٌ لا أثر فيها لجرحٍ ولا لذكرى. حتى التراب هنا يبدو مطيعًا.</p>
+
+<p>وفي الزاوية، أرجوحةٌ تتأرجح وحدها. تتحرك ذهابًا وإيابًا كمن تنتظر طفلةً لم تأتِ.</p>
+
+<p>انفتح الباب. وخرج هو.</p>
+
+<p>حيٌّ. شابٌّ. وجهه هو وجه أبي، لكن بلا خطوط السنوات التي انقضت من عمره. مبتسمٌ ابتسامةً لم تُلوّثها الجنائز. وفي حضنه طفلةٌ صغيرةٌ لا تشبهني، شعرها بنيٌّ مجعد، وعيناها واسعتان كمن لم ترَ حزنًا قط.</p>
+
+<p>توقّف قلبي عن الحركة مؤقتًا.</p>
+
+<p>«أبي؟» قلتها بلوعة كمن تنادي ميتًا لعلّه يرد.</p>
+
+<p>فالتفتَ، ونظر إليّ نظرةَ من يرى ظلًّا لا يعرف له اسمًا.</p>
+
+<div class="passage-voice">
+«نعم يا آنسة؟ هل تبحثين عن أحد؟»
+</div>
+
+<p class="no-indent">صوته هو صوته. لكن النبرة غريبة. نبرة رجلٍ لا يحمل في صوته همًّا.</p>
+
+<p>قلتُ اسمه. اسمه وحده، كمن يُلقي تعويذةً قديمة مكتملة التأثير. فتغيّر وجهه. لم يخف. لم يغضب. تغيّر وجهه شفقةً، كشفقةِ من يملك شيئًا على من فقد كل شيء.</p>
+
+<div class="passage-voice">
+«أنا آسف. لا أعرفكِ. ربما تشبهين أحدًا أعرفه.»
+</div>
+
+<p class="no-indent">نزلت الطفلة من حضنه، وركضت إليّ بخطواتٍ واثقةٍ كمدللة تملك أبًا لا يغيب. وقفت أمامي، ورفعت رأسها لتنظر في عيني. وقالت بصوتٍ نظيفٍ لا يعرف الخراب:</p>
+
+<div class="passage-voice">
+«ماما تقول لنا أن لا نتحدث مع الغرباء. لكن عينيكِ حزينتان. هل ضاع منكِ أحد؟»
+</div>
+
+<p class="no-indent">ماما.</p>
+
+<p>الكلمة نفسها، لكنها تخرج من فمٍ آخر، بصوتٍ آخر، بضحكةٍ أخرى لا ترتعش. وامرأةٌ تخرج لتمسك يد أبي بيدٍ لا ترتجف. امرأةٌ أخرى لم تكن أمي ولا حتى أنا. وجهها هادئ، ثوبها بسيط، وابتسامتها تقول: أنا هنا منذ البداية.</p>
+
+<p>فهمتُ في تلك اللحظة. فهمتُ أنني أقف في الكون الذي لم أولد فيه. الكون الذي اختار فيه أبي أن ينجو منّي لأنجو منه. الكون الذي اختار فيه السعادة على حسابي.</p>
+
+<div class="scene-break">
+  <svg viewBox="0 0 60 12" fill="none" stroke="#8C6B3F" stroke-width="0.6">
+    <circle cx="6" cy="6" r="1.5"/>
+    <line x1="14" y1="6" x2="26" y2="6"/>
+    <circle cx="30" cy="6" r="2"/>
+    <line x1="34" y1="6" x2="46" y2="6"/>
+    <circle cx="54" cy="6" r="1.5"/>
+  </svg>
+</div>
+
+<p class="no-indent">وقفتُ أراقبهم من بعيد، كأنني انظر إلى فيلمٍ لا أملك حقّ إيقافه. أبي يرفع الطفلة إلى السماء ويصرخ:</p>
+
+<div class="passage-voice">
+«أعلى! أعلى يا ملاكي!»
+</div>
+
+<p class="no-indent">الطفلة تضحك. ضحكةٌ تملأ الشارع. الجملة نفسها. الصوت نفسه. الحنان نفسه. لكن الحنان هنا لا يعرف اسمي.</p>
+
+<p>جلستُ على الرصيف. الحجر باردٌ تحت يدي. والبكاء يأتيني باردًا كمعتوهٍ يبكي على نفسٍ لم تُخلق. لم أبكِ عليه. بكيتُ عليّ. بكيتُ على الاحتمال الذي لم يُمنح فرصة. على الطفلة التي لم أكنها، وعلى الأب الذي لم أكن له.</p>
+
+<p>مرّت ساعة وأنا جالسة. الناس تمرّ ولا تنظر. رجلٌ يسحب عربة خضار، امرأةٌ تحمل كيس خبز، طفلان يركضان. كأنني شفافة. كأنني خطأ مطبعي في صفحة الوجود. وكأن وجودي هنا خطأٌ يجب تصحيبه.</p>
+
+<p>فجاءني صوته. ليس صوت الرجل الذي أمامي، بل صوت الرجل الذي في الدفتر، في الفراغ، في المكان الذي لا يموت فيه الآباء:</p>
+
+<div class="passage-whisper">
+«دُجى. هل فهمتِ الآن؟<br>
+الحبّ ليس أن تكوني موجودة.<br>
+الحبّ أحيانًا أن تختاري أن لا تكوني،<br>
+ليسعد الآخر.»
+</div>
+
+<p class="no-indent">صرختُ في الفراغ، وصوتي يعود إليّ مكسورًا:</p>
+
+<div class="passage-whisper">
+«أنت تكذب!<br>
+أنت تكذب!<br>
+لو كنت تحبني، لما اخترت أن لا أكون!»
+</div>
+
+<p class="no-indent">لكن الفراغ لا يردّ على من تكسرت لغته.</p>
+
+<p>جلستُ هناك حتى غربت الشمس. رأيتُ أبي يعلّم الطفلة ركوب الدراجة. يمسك بها من الخلف، يركض معها، يصرخ:</p>
+
+<div class="passage-voice">
+«لا تخافي! أنا معكِ!»
+</div>
+
+<p class="no-indent">ثم يتركها فجأة. الطفلة تمشي وحدها، تضحك، تلتفت إليه بفخر. وأنا أتذكر أنني لم أتعلم ركوب الدراجة إلا وحدي، وسقطتُ سبع مرات، ولم يكن أحدٌ ليقول لي: لا تخافي، أنا معكِ.</p>
+
+<p>التفتُّ فوجدتُ حازم يقف بجانبي. وجهه متعبٌ من تكرار الإنقاذ. ملابسه نفسها، لكن الغبار عليها أكثر.</p>
+
+<div class="passage-voice">
+«الوقت انتهى. الكون بدأ يلفظكِ. لو بقيتِ دقيقةً أخرى، لن تعودي.»
+</div>
+
+<p class="no-indent">قلتُ وأنا أتشبّث بالهواء:</p>
+
+<p>«لا أريد الخروج. هنا هو سعيد. هنا لم أكسره. ولم أجعله يبكي.»</p>
+
+<p>فهزّ رأسه، والكلمة تسقط كحكمٍ نهائي:</p>
+
+<div class="passage-voice">
+«ستنسين كل شيء هنا إذا بقيتِ. وحين ترجعين، ستنسين وجه أبيكِ الحقي. وهذا أخطر من الموت يا دُجى.»
+</div>
+
+<p class="no-indent">لمستُ الدفتر، فأحسستُ أن الخط ٤٤ يذوب تحت أصابعي كملحٍ في ماء. وأيقنت هذا الكون يمحوني لأنه لا يحتملني. لأنني نشازٌ في لحنه.</p>
+
+<p>وقبل أن أخرج، ركضت الطفلة إليّ. وضعت في كفي ورقةً صغيرةً مطويةً كسرّ. كفّها دافئة، رائحتها صابون أطفال. قالت:</p>
+
+<div class="passage-voice">
+«أبي قال أعطيها للسيدة التي تبكي عند الباب. قال إنها ستفهم بمفردها.»
+</div>
+
+<p class="no-indent">فتحتُ الورقة، وكان خطّه يعرفني حتى حين لا يعرفني:</p>
+
+<div class="passage-letter">
+  <p>«إذا قرأتِ هذا، فاعلمي أنني في كل كونٍ أحبكِ.</p>
+  <p>حتى في الكون الذي لم أمنحكِ الحياة فيه.</p>
+  <p>لأنكِ أنتِ الحياة التي لم أستحقها.</p>
+  <p>سامحيني يا دُجى.</p>
+  <p>سامحي أباكِ الجبان.»</p>
+</div>
+
+<p class="no-indent">خرجتُ. والبيت الأبيض انهار خلفي كرملٍ لا يملك أن يتماسك. الجدار الأبيض تشقق، الحديقة ذبلت، والأرجوحة وقفت ساكنةً كأنها فهمت أن لا أحد سيأتي بعد.</p>
+
+<p>عدتُ إلى غرفتي، والدفتر في حضني أثقل من كل الأكوان. ورائحة الشاي البارد استقبلتني.</p>
+
+<p>حازم كان ساكتًا. جالسًا على الكرسي، يحدق في الأرض بسكون مألوف عليه. قلتُ له وأنا أرتجف:</p>
+
+<p>«أبي حنونٌ جدًا... لدرجة أنه اختار أن لا أولد.» صوتي خرج غريبًا، كأنه صوت فتاةٍ أخرى.</p>
+
+<p>فهزّ رأسه، وقال الجملة التي صارت نبوءتي:</p>
+
+<div class="passage-whisper">
+«قلتُ لكِ.<br>
+حنانه سيقتلكِ.<br>
+لكن هذه المرة...<br>
+قتلكِ بلطف.»
+</div>
+
+</div>
+
+<!-- ============================================================
+     PAGE — CHAPTER 3 OPENER
+     ============================================================ -->
+<div class="page page-chapter-opener" id="chapter-3">
+  <div class="chapter-ghost-num">03</div>
+
+  <svg class="chapter-orbit" viewBox="0 0 200 200" fill="none" stroke="#8C6B3F" stroke-width="0.3">
+    <circle cx="100" cy="100" r="95"/>
+    <circle cx="100" cy="100" r="78"/>
+    <circle cx="100" cy="100" r="60"/>
+    <circle cx="100" cy="100" r="42"/>
+    <circle cx="100" cy="100" r="24"/>
+    <line x1="5" y1="100" x2="195" y2="100"/>
+    <line x1="100" y1="5" x2="100" y2="195"/>
+    <circle cx="100" cy="5" r="2" fill="#8C6B3F" stroke="none"/>
+    <circle cx="178" cy="100" r="1.5" fill="#8C6B3F" stroke="none"/>
+  </svg>
+
+  <div class="chapter-content">
+    <div class="chapter-label">الفصل الثالث</div>
+    <div class="chapter-num-small">03</div>
+    <h2 class="chapter-title">الخط ١٢<br>المعادلة المعكوسة</h2>
+    <div class="chapter-title-rule"></div>
+    <div class="chapter-epigraph">
+      «العجز أحيانًا أقوى صور الحبّ.<br>
+      وأخاف أن أعيش فأكون عبئًا عليكِ،<br>
+      فتكرهين حتى اليوم الذي ولدتِ فيه.»
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER 3 BODY
+     ============================================================ -->
+<div class="chapter-body">
+
+<p class="first-para">صحوتُ على ثقلٍ لا يشبه النوم. ثقلٌ صغيرٌ دافئٌ ينام فوق صدري، ويتنفس باسمي.</p>
+
+<p>فتحتُ عيني فوجدتُ طفلًا لا يتجاوز السنتين، ينظر إليّ ويقول:</p>
+
+<div class="passage-voice">
+«ماما.»
+</div>
+
+<p class="no-indent">الكلمة ضربتني كصفعة. أنا؟ ماما؟ منذ متى صرتُ أمًا؟ منذ متى صار لي طفلٌ أحمل شقاوته أكثر مما أحمل نفسي؟</p>
+
+<p>نظرتُ حولي فوجدتُ غرفةً ضيّقةً لا تعترف بالثراء. جدارٌ متشقق، مصباحٌ يرمش كأنه يخجل من ضوئه، وسريرٌ حديديٌّ يصرّ كلما تحركتُ. وعلى الجدار صورةٌ لي. لكنني في الصورة لستُ أنا التي أعرفها. أنا في الصورة أحمل طفلًا، وأبي يقف خلفي، يبتسم ابتسامةً مطفأةً كشمعةٍ احترقت حتى النخاع.</p>
+
+<p>دخل الغرفة يعرج. شعره أبيض كله كأنه قضى مئة سنة في ليلةٍ واحدة. ظهره محنيٌّ، وعصاه ترتجف في يده كأنها تخاف أن تسقطه.</p>
+
+<div class="passage-voice">
+«أقصد دُجى... بنتي... أأطعمتِ الصغير؟»
+</div>
+
+<p class="no-indent">لم أرد. اقترب مني وقبّل رأسي. نفس القُبلة. نفس الرجفة القديمة في شفتيه، لكنها الآن أبطأ، أثقل، كأنها تخرج من جسدٍ لا يطاوعه.</p>
+
+<p>جلس بجانبي على طرف السرير. السرير انخفض تحته كأنه يعرفه منذ زمن. قال، والكلمة تخرج منه مكسورةً كشخص يعترف بجريمةٍ لم يرتكبها:</p>
+
+<div class="passage-letter">
+  <p>«أنا آسف يا بنتي. لم أستطع أن أكون لكِ شيئًا.»</p>
+</div>
+
+<p class="no-indent">فقلتُ، وأنا أمسك يده المرتعشة كمن تمسك بدليلِ براءته:</p>
+
+<p>«أنت أبي. وهذا بمفرده يكفي.»</p>
+
+<p>فضحك ضحكةً لا تشبه الضحك. ضحكةٌ مريرة، قصيرة، تنتهي بسعالٍ يهزّ صدره.</p>
+
+<div class="passage-letter">
+  <p>«لا يكفي. أنتِ كنتِ تستحقين أبًا يحملكِ للسماء. وأنا لم أستطع حتى أن أحمل نفسي.»</p>
+</div>
+
+<p class="no-indent">سكتُّ. ماذا أقول لرجلٍ يعتذر عن وجوده؟</p>
+
+<p>في هذا الكون، أصيب أبي بحادثٍ يوم ولادتي. سيارة مسرعة، طريقٌ مبتل، وانزلاقٌ واحدٌ كسر له عموده الفقري قبل أن يحملني. فشلّه القدر قبل أن يحملني. وتحملت المسؤولية أمي لأن الرجال المكسورين لا يصلحون إلا للبيوت. فربيتُ أنا وأبي بعضنا البعض، كغريقين تشبّث كلٌّ بالآخر لئلا يغرق.</p>
+
+<div class="scene-break">
+  <svg viewBox="0 0 60 12" fill="none" stroke="#8C6B3F" stroke-width="0.6">
+    <circle cx="6" cy="6" r="1.5"/>
+    <line x1="14" y1="6" x2="26" y2="6"/>
+    <circle cx="30" cy="6" r="2"/>
+    <line x1="34" y1="6" x2="46" y2="6"/>
+    <circle cx="54" cy="6" r="1.5"/>
+  </svg>
+</div>
+
+<p class="no-indent">كنتُ أذهب مع أمي للعمل في البيوت. أغسل، وأمسح، وأعود لأجد أبي جالسًا مع الصغير. يعلمه الحروف بأصابعٍ ترتجف.</p>
+
+<div class="passage-voice">
+«ألف... باء... تاء...»
+</div>
+
+<p class="no-indent">ويقول له:</p>
+
+<div class="passage-voice">
+«هذه أمكِ. احفظها. فهي فعلت لأجلكِ ما لم أفعله لأجلها.»
+</div>
+
+<p class="no-indent">وفي الليل، حين ينام الطفل، يأتي أبي إلى غرفتي. يجلس على طرف السرير، وصوته يخرج خافتًا كمن يخاف أن يوقظ ذنبه:</p>
+
+<div class="passage-voice">
+«دُجى، أنا خائف.»
+</div>
+
+<p class="no-indent">«ممَ تخاف يا أبي؟»</p>
+
+<div class="passage-letter">
+  <p>«أخاف أن تموتي قبلي، فأبقى وحدي في هذا الخراب.</p>
+  <p>وأخاف أن أموت قبلكِ فأترككِ وحدكِ في هذا الخراب.</p>
+  <p>وأخاف أن أعيش فأكون عبئًا عليكِ، فتكرهين حتى اليوم الذي ولدتِ فيه.»</p>
+</div>
+
+<p class="no-indent">أمسكتُ يده. نفسها اليد التي كانت تصلح لي مقتنياتي، صارت ترتجف في يدي كعصفورٍ مبلول. قلتُ له، والكلمة تخرج مني كوعدٍ أخير:</p>
+
+<p>«أبي، أنت لست عبئًا. أنت بيتي.»</p>
+
+<p>فبكى. بكى كمن يُسمح له بالبكاء لأول مرة. وقال:</p>
+
+<div class="passage-letter">
+  <p>«أعرف. لذلك أكره نفسي.</p>
+  <p>لأنني جعلتكِ تكبرين قبل أوانكِ، وتشيخين وأنتِ طفلة.»</p>
+</div>
+
+<p class="no-indent">وفي هذا الكون، لم يقل لي يومًا: أنا فخورٌ بكِ. لكن عينيه كانتا تقولانها كل يومٍ ألف مرة. وكانتا تكفيان.</p>
+
+<div class="scene-break">
+  <svg viewBox="0 0 60 12" fill="none" stroke="#8C6B3F" stroke-width="0.6">
+    <circle cx="6" cy="6" r="1.5"/>
+    <line x1="14" y1="6" x2="26" y2="6"/>
+    <circle cx="30" cy="6" r="2"/>
+    <line x1="34" y1="6" x2="46" y2="6"/>
+    <circle cx="54" cy="6" r="1.5"/>
+  </svg>
+</div>
+
+<p class="no-indent">مرّ أسبوع. أسبوعٌ واحدٌ فهمتُ فيه معنى أن تكوني أمًا لأبيك. أطعمه، ألبسه، أغسل له، وأكذب عليه أن الطعام الذي يصنعه لذيذ. وكل ليلةٍ قبل أنام، يهمس لي:</p>
+
+<div class="passage-voice">
+«دُجى... لا تفتحي الخط ١٩. هناك نسخةٌ مني... ستكسركِ.»
+</div>
+
+<p class="no-indent">وتركني أقضي الليلة في حيرة أتقلب وأبحث عن إجابة. قضينا معًا في هذا الكون ستة أيام.</p>
+
+<p>وفي ليلة اليوم السابع، مات بين يديّ. مات وهو يهمس، والهمس يخرج منه كوصيةٍ أخيرة:</p>
+
+<div class="passage-whisper">
+«لا تكرهيني يا دُجى.<br>
+أنا حاولت.»
+</div>
+
+<p class="no-indent">أغلقتُ عينيه بقوةٍ ليست من صفاتي. وأغلقتُ معهما بابًا في صدري. وعُدتُ.</p>
+
+<p>عدتُ إلى غرفتي، والدفتر على الطاولة. الخط ١٢ اختفى من الصفحة كأن لم يكن.</p>
+
+<p>وقف حازم، وعيناه تقولان إنه فهم قبل أن أفهم:</p>
+
+<div class="passage-voice">
+«الآن فهمتِ؟»
+</div>
+
+<p class="no-indent">«فهمتُ ماذا؟»</p>
+
+<div class="passage-voice">
+«أن أباكِ لم يكن خائفًا عليكِ من العالم. كان خائفًا عليكِ منه هو. من عجزه عن مساندتك حتى النهاية.»
+</div>
+
+<p class="no-indent">جلستُ على الأرض، والبكاء يأتيني بلا صوت. لم أبكِ لأن أبي مات. بكيتُ لأنه مات في كونٍ كان عاجز فيه أن يحمي نفسه. بكيتُ لأن العجز أحيانًا أقوى صور الحبّ.</p>
+
+<div class="scene-break">
+  <svg viewBox="0 0 60 12" fill="none" stroke="#8C6B3F" stroke-width="0.6">
+    <circle cx="6" cy="6" r="1.5"/>
+    <line x1="14" y1="6" x2="26" y2="6"/>
+    <circle cx="30" cy="6" r="2"/>
+    <line x1="34" y1="6" x2="46" y2="6"/>
+    <circle cx="54" cy="6" r="1.5"/>
+  </svg>
+</div>
+
+<p class="no-indent">وفجأةً انفتح الدفتر وحده. انفتح على الخط ١٩، وكأن يدًا خفيةً تدفعني إليه. ومكتوبٌ تحته بخطِّ أبي المرتجف:</p>
+
+<div class="passage-letter">
+  <p>«لا تفتحي. أرجوكِ. هنا أنا الوحش.»</p>
+</div>
+
+<p class="no-indent">نظرتُ إلى حازم. فقال، والكلمة تخرج منه كمن يسلّمكِ سكينًا ويقول: اختاري:</p>
+
+<div class="passage-voice">
+«الاختيار لكِ. لكن اعلمي: كل كونٍ تفتحينه، تموت جزء من ذاكرتكِ!»
+</div>
+
+<p class="no-indent">ابتسمتُ. الابتسامة التي ورثتها منه، ابتسامةُ من لا يخاف الموت لأنه عاشه ألف مرة. قلبتُ الصفحة، وهمستُ للعدم، للخط ١٩، لأبي الذي ينتظرني هناك:</p>
+
+<div class="passage-whisper">
+«يا أبي...<br>
+لو كنتَ وحشًا،<br>
+فلا مانع من أن تأكلني كلّي.»
+</div>
+
+</div>
+
+</body>
+</html>

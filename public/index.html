@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>انتروبيا الحنين — شذى ياسر الجوبحي</title>
+<meta name="description" content="رواية أدبية / فلسفية / نفسية لشذى ياسر الجوبحي. إخراج editorial احترافي: نسخة طباعة PDF/X، نسخة قراءة رقمية A5، وغلاف مداري.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;700&family=Reem+Kufi:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --night: #0E1116;
+  --night-deep: #07090C;
+  --night-soft: #181B22;
+  --brass: #B89968;
+  --brass-deep: #8C6B3F;
+  --brass-glow: #E4C988;
+  --paper: #F4F1EA;
+  --paper-soft: #EFEBE1;
+  --ink: #1B1A17;
+  --ink-soft: #4A463E;
+  --ink-mute: #8A847A;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--paper);
+  font-family: 'Noto Naskh Arabic', 'IBM Plex Sans Arabic', serif;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* === HERO === */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+.hero-publisher {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.6em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 60px;
+}
+.hero-title {
+  font-family: 'Reem Kufi', serif;
+  font-size: clamp(56px, 11vw, 120px);
+  font-weight: 500;
+  color: var(--paper);
+  line-height: 1.05;
+  text-shadow: 0 0 40px rgba(228, 201, 136, 0.2);
+}
+.hero-rule {
+  width: 80px;
+  height: 1px;
+  background: var(--brass);
+  margin: 32px auto;
+  position: relative;
+}
+.hero-rule::before, .hero-rule::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--brass-glow);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.hero-rule::before { right: -16px; }
+.hero-rule::after  { left:  -16px; }
+.hero-subtitle {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: rgba(244, 241, 234, 0.65);
+  margin-bottom: 48px;
+}
+.hero-author {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 500;
+  color: var(--paper);
+  letter-spacing: 0.08em;
+}
+.hero-author-role {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 14px;
+  color: var(--brass);
+  margin-top: 8px;
+  letter-spacing: 0.3em;
+}
+.hero-cta {
+  margin-top: 56px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+}
+.btn-primary {
+  background: var(--brass);
+  color: var(--night-deep);
+}
+.btn-primary:hover {
+  background: var(--brass-glow);
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid rgba(184, 153, 104, 0.5);
+}
+.btn-secondary:hover {
+  border-color: var(--brass-glow);
+  background: rgba(184, 153, 104, 0.08);
+}
+
+/* === SCROLL CUE === */
+.scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.3em;
+  z-index: 2;
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* === SECTIONS === */
+section {
+  padding: 120px 24px;
+  position: relative;
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.section-title {
+  font-family: 'Reem Kufi', serif;
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 500;
+  color: var(--paper);
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+.section-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--brass);
+  margin: 0 auto 60px;
+}
+.section-text {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 18px;
+  line-height: 1.95;
+  color: rgba(244, 241, 234, 0.78);
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+/* === ABOUT === */
+.about {
+  background: var(--night-soft);
+}
+.about-quote {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: clamp(22px, 3vw, 30px);
+  color: var(--brass-glow);
+  text-align: center;
+  max-width: 800px;
+  margin: 40px auto;
+  line-height: 1.7;
+}
+.about-quote::before, .about-quote::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--brass);
+  margin: 20px auto;
+  opacity: 0.5;
+}
+
+/* === DOWNLOADS === */
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 60px;
+}
+.download-card {
+  background: rgba(244, 241, 234, 0.03);
+  border: 1px solid rgba(184, 153, 104, 0.2);
+  border-radius: 4px;
+  padding: 36px 28px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.download-card:hover {
+  border-color: var(--brass);
+  background: rgba(184, 153, 104, 0.06);
+  transform: translateY(-4px);
+}
+.download-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  color: var(--brass);
+}
+.download-title {
+  font-family: 'Reem Kufi', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--paper);
+  margin-bottom: 8px;
+}
+.download-meta {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 12px;
+  color: var(--brass);
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+.download-desc {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 14px;
+  color: rgba(244, 241, 234, 0.65);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.download-action {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--brass-glow);
+  letter-spacing: 0.1em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* === PREVIEW === */
+.preview-frame {
+  margin-top: 60px;
+  border: 1px solid rgba(184, 153, 104, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--paper);
+}
+.preview-frame img {
+  width: 100%;
+  display: block;
+}
+
+/* === CHAPTERS === */
+.chapters-list {
+  max-width: 760px;
+  margin: 60px auto 0;
+}
+.chapter-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(184, 153, 104, 0.15);
+  align-items: start;
+}
+.chapter-num {
+  font-family: 'Reem Kufi', serif;
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--brass);
+  line-height: 1;
+  direction: ltr;
+}
+.chapter-info h3 {
+  font-family: 'Reem Kufi', serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--paper);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.chapter-info p {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: rgba(244, 241, 234, 0.55);
+  line-height: 1.7;
+}
+
+/* === FOOTER === */
+footer {
+  background: var(--night-deep);
+  padding: 60px 24px 40px;
+  text-align: center;
+  border-top: 1px solid rgba(184, 153, 104, 0.15);
+}
+.footer-mark {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 20px;
+  opacity: 0.6;
+}
+.footer-text {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 14px;
+  color: rgba(244, 241, 234, 0.5);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.footer-contact {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 13px;
+  color: var(--brass);
+  direction: ltr;
+  letter-spacing: 0.1em;
+  margin-top: 16px;
+}
+.footer-copy {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 11px;
+  color: rgba(244, 241, 234, 0.3);
+  letter-spacing: 0.2em;
+  margin-top: 24px;
+  text-transform: uppercase;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+  .hero-title { font-size: 56px; }
+  section { padding: 80px 20px; }
+  .chapters-list .chapter-row { grid-template-columns: 60px 1fr; gap: 16px; }
+  .chapter-num { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <svg class="hero-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="hg" cx="50%" cy="50%" r="65%">
+        <stop offset="0%" stop-color="#181B22"/>
+        <stop offset="55%" stop-color="#0E1116"/>
+        <stop offset="100%" stop-color="#07090C"/>
+      </radialGradient>
+      <radialGradient id="wg" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#E4C988" stop-opacity="0.30"/>
+        <stop offset="40%" stop-color="#B89968" stop-opacity="0.10"/>
+        <stop offset="100%" stop-color="#8C6B3F" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1440" height="900" fill="url(#hg)"/>
+    <circle cx="720" cy="450" r="320" fill="url(#wg)"/>
+    <g fill="none" stroke="#B89968" stroke-opacity="0.22">
+      <circle cx="720" cy="450" r="780" stroke-width="0.6"/>
+      <circle cx="720" cy="450" r="560" stroke-width="0.5"/>
+      <circle cx="720" cy="450" r="380" stroke-width="0.5"/>
+      <circle cx="720" cy="450" r="220" stroke-width="0.4"/>
+      <circle cx="720" cy="450" r="100" stroke-width="0.5"/>
+    </g>
+    <g fill="none" stroke="#B89968" stroke-opacity="0.18" stroke-width="0.4">
+      <ellipse cx="720" cy="450" rx="900" ry="260" transform="rotate(15 720 450)"/>
+      <ellipse cx="720" cy="450" rx="900" ry="340" transform="rotate(-25 720 450)"/>
+    </g>
+    <g fill="#E4C988">
+      <circle cx="200" cy="150" r="1.2" opacity="0.6"/>
+      <circle cx="1200" cy="200" r="1.0" opacity="0.5"/>
+      <circle cx="380" cy="780" r="1.4" opacity="0.7"/>
+      <circle cx="1100" cy="750" r="0.9" opacity="0.5"/>
+      <circle cx="720" cy="80" r="2" opacity="0.8"/>
+      <circle cx="720" cy="820" r="2" opacity="0.7"/>
+    </g>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-publisher">رواية · ٢٠٢٦</div>
+    <h1 class="hero-title">انتروبيا<br>الحنين</h1>
+    <div class="hero-rule"></div>
+    <div class="hero-subtitle">رواية أدبية · فلسفية · نفسية</div>
+    <div class="hero-author">شذى ياسر الجوبحي</div>
+    <div class="hero-author-role">اليمن</div>
+
+    <div class="hero-cta">
+      <a href="#downloads" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/>
+        </svg>
+        تحميل الكتاب
+      </a>
+      <a href="#preview" class="btn btn-secondary">معاينة</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">↓ تابع ↓</div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="about">
+  <div class="container">
+    <div class="section-label">عن الرواية</div>
+    <h2 class="section-title">لا شيء يُفنى،<br>لكن كل شيء يتغيّر</h2>
+    <div class="section-divider"></div>
+
+    <div class="about-quote">
+      لو كان الفقد قانونًا فيزيائيًا، لكان ينصّ على أن:<br>
+      لا شيء يُفنى، لكن كل شيء يتغيّر.
+    </div>
+
+    <p class="section-text">
+      في «انتروبيا الحنين»، تأخذنا شذى ياسر الجوبحي في رحلة بين أكوان متعددة، حيث تبحث الابنة عن أبيها الفيزيائي في كل خطٍّ من خطوط دفتره الأزرق — كونٌ حيث لم يمت، وآخر حيث لم تُولد، وثالثٌ حيث صار هو الطفل وهي الأم. بين معادلات الجاذبية وثبات الطاقة، تكتب الرواية حنينًا لا يتحلل، وحنانًا أخطر من أيّ شيء. ليست هذه رواية خيال علمي، بل محاولة يائسة لتحويل الحنان إلى معادلة، والغياب إلى ورق، والانهيار إلى لغة مفهومة.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== DOWNLOADS ==================== -->
+<section id="downloads">
+  <div class="container">
+    <div class="section-label">المُسلّمات</div>
+    <h2 class="section-title">حمّل الكتاب</h2>
+    <div class="section-divider"></div>
+
+    <div class="downloads-grid">
+      <a class="download-card" href="Print_Ready_Entropy_of_Longing.pdf" download>
+        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 2h9l5 5v15a1 1 0 01-1 1H6a1 1 0 01-1-1V3a1 1 0 011-1z"/>
+          <path d="M14 2v6h6"/>
+          <text x="12" y="18" text-anchor="middle" font-size="6" font-family="monospace" fill="currentColor" stroke="none">PDF</text>
+        </svg>
+        <div class="download-title">نسخة الطباعة</div>
+        <div class="download-meta">6×9 INCH · BLEED 3MM · 24 صفحة</div>
+        <div class="download-desc">ملف PDF جاهز للطباعة الاحترافية بمقاس 152×229 ملم مع هوامش قص 3 ملم. مناسب لدور النشر والمطابع.</div>
+        <span class="download-action">
+          Print_Ready_Entropy_of_Longing.pdf
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="download-card" href="Digital_Reading_Entropy_of_Longing.pdf" download>
+        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="3" width="16" height="18" rx="1"/>
+          <line x1="8" y1="8" x2="16" y2="8"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+          <line x1="8" y1="16" x2="13" y2="16"/>
+        </svg>
+        <div class="download-title">نسخة القراءة الرقمية</div>
+        <div class="download-meta">A5 · 26 صفحة · روابط داخلية</div>
+        <div class="download-desc">محسّنة للقراءة على الجوال والأجهزة اللوحية بمقاس A5. تتضمن روابط داخلية للفهرس للتنقل السريع بين الفصول.</div>
+        <span class="download-action">
+          Digital_Reading_Entropy_of_Longing.pdf
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="download-card" href="Cover_Front_Back.pdf" download>
+        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="4" width="6" height="16" rx="0.5"/>
+          <rect x="10" y="4" width="11" height="16" rx="0.5"/>
+          <line x1="12" y1="8" x2="19" y2="8"/>
+          <line x1="12" y1="12" x2="19" y2="12"/>
+        </svg>
+        <div class="download-title">الغلاف الكامل</div>
+        <div class="download-meta">318×235 MM · خلفي + كعب + أمامي</div>
+        <div class="download-desc">غلاف الرواية الكامل بتصميم مداري: فضاء ليلي، آثار خطوط فيزيائية، وضوء دافئ بعيد. جاهز للطباعة مع هوامش قص.</div>
+        <span class="download-action">
+          Cover_Front_Back.pdf
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="download-card" href="preview_all_pages.jpg" target="_blank">
+        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="1"/>
+          <circle cx="9" cy="9" r="2"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <div class="download-title">معاينة شاملة</div>
+        <div class="download-meta">JPG · الغلاف + كل الصفحات</div>
+        <div class="download-desc">صورة واحدة تجمع الغلاف وكل صفحات الكتاب الـ24 على شكل جدول معاينة سريع لمراجعة الهوية البصرية الكاملة.</div>
+        <span class="download-action">
+          preview_all_pages.jpg
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="download-card" href="preview_first_10_pages.jpg" target="_blank">
+        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="1"/>
+          <line x1="3" y1="9" x2="21" y2="9"/>
+          <line x1="3" y1="15" x2="21" y2="15"/>
+        </svg>
+        <div class="download-title">معاينة أول ١٠ صفحات</div>
+        <div class="download-meta">JPG · الصفحات الأمامية</div>
+        <div class="download-desc">لمحة عن صفحة العنوان، حقوق النشر، الإهداء، المقدمة، الفهرس، وافتتاحية الفصل الأول.</div>
+        <span class="download-action">
+          preview_first_10_pages.jpg
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="download-card" href="source_html/" target="_blank">
+        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+        <div class="download-title">المصدر القابل للتعديل</div>
+        <div class="download-meta">HTML · مفتوح المصدر</div>
+        <div class="download-desc">قوالب HTML/CSS الكاملة للكتاب الداخلي والغلاف. يمكن تعديل النصوص أو التصميم وإعادة التصدير.</div>
+        <span class="download-action">
+          source_html/
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PREVIEW ==================== -->
+<section id="preview" class="about">
+  <div class="container">
+    <div class="section-label">لمحة بصرية</div>
+    <h2 class="section-title">معاينة داخلية</h2>
+    <div class="section-divider"></div>
+    <p class="section-text" style="text-align:center; margin-bottom: 40px;">
+      جميع صفحات الكتاب الـ24 + الغلاف في صورة واحدة للمراجعة السريعة للهوية البصرية الكاملة.
+    </p>
+    <div class="preview-frame">
+      <img src="preview_all_pages.jpg" alt="معاينة شاملة لكل صفحات الكتاب" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CHAPTERS ==================== -->
+<section>
+  <div class="container">
+    <div class="section-label">الفصول</div>
+    <h2 class="section-title">ثلاثة أكوان،<br>ثلاثة فصول</h2>
+    <div class="section-divider"></div>
+
+    <div class="chapters-list">
+      <div class="chapter-row">
+        <div class="chapter-num">01</div>
+        <div class="chapter-info">
+          <h3>الكف التي لا تتحلل</h3>
+          <p>«لا شيء يُفنى، لكن كل شيء يتغيّر — حتى الكفّ التي ضغطت أخيرًا، تبقى أثرًا لا يتحلل.»</p>
+        </div>
+      </div>
+
+      <div class="chapter-row">
+        <div class="chapter-num">02</div>
+        <div class="chapter-info">
+          <h3>الخط ٤٤ — حيث لم أُولد</h3>
+          <p>«الحبّ ليس أن تكوني موجودة. الحبّ أحيانًا أن تختاري أن لا تكوني، ليسعد الآخر.»</p>
+        </div>
+      </div>
+
+      <div class="chapter-row">
+        <div class="chapter-num">03</div>
+        <div class="chapter-info">
+          <h3>الخط ١٢ — المعادلة المعكوسة</h3>
+          <p>«العجز أحيانًا أقوى صور الحبّ. وأخاف أن أعيش فأكون عبئًا عليكِ، فتكرهين حتى اليوم الذي ولدتِ فيه.»</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <svg class="footer-mark" viewBox="0 0 24 24" fill="none" stroke="#B89968" stroke-width="1.2">
+    <circle cx="12" cy="12" r="9"/>
+    <circle cx="12" cy="12" r="3" fill="#B89968" stroke="none"/>
+    <line x1="12" y1="0" x2="12" y2="6"/>
+    <line x1="12" y1="18" x2="12" y2="24"/>
+  </svg>
+
+  <div class="footer-text">
+    انتروبيا الحنين · رواية أدبية<br>
+    شذى ياسر الجوبحي · الطبعة الأولى ٢٠٢٦
+  </div>
+
+  <div class="footer-contact">+967 775 863 594</div>
+
+  <div class="footer-copy">
+    إخراج editorial · جميع الحقوق محفوظة للمؤلفة
+  </div>
+</footer>
+
+</body>
+</html>

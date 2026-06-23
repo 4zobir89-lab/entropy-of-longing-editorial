@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>انتروبيا الحنين — الغلاف</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================================
+   انتروبيا الحنين — Cover Spread (Back + Spine + Front)
+   Trim size: 6×9 inch (152×229 mm)
+   Spine: ~8 mm (depends on page count; we use 8mm for ~40 pages)
+   Bleed: 3 mm each side
+   Total spread width: 152 + 8 + 152 + 6 = 318 mm
+   Total spread height: 229 + 6 = 235 mm
+   ========================================================================= */
+
+@page {
+  size: 318mm 235mm;
+  margin: 0;
+}
+
+:root {
+  --night:        #0E1116;
+  --night-deep:   #07090C;
+  --night-soft:   #181B22;
+  --brass:        #B89968;
+  --brass-deep:   #8C6B3F;
+  --brass-glow:   #E4C988;
+  --paper:        #F4F1EA;
+  --paper-soft:   #EFEBE1;
+  --ink:          #1B1A17;
+  --ink-soft:     #4A463E;
+  --ink-mute:     #8A847A;
+
+  --f-display: 'Reem Kufi', 'IBM Plex Sans Arabic', serif;
+  --f-head:    'IBM Plex Sans Arabic', 'Noto Naskh Arabic', sans-serif;
+  --f-body:    'Noto Naskh Arabic', 'IBM Plex Sans Arabic', serif;
+  --f-quote:   'Amiri', 'Noto Naskh Arabic', serif;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 318mm;
+  background: var(--night-deep);
+  color: var(--paper);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media screen {
+  html { background: #2a2826; display: flex; justify-content: center; }
+  body { margin: 24px auto; box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
+}
+
+/* Spread container */
+.cover-spread {
+  width: 318mm;
+  height: 235mm;
+  display: grid;
+  grid-template-columns: 152mm 8mm 152mm;   /* back, spine, front */
+  background: var(--night);
+  position: relative;
+  overflow: hidden;
+}
+
+/* The whole spread shares one continuous night background with
+   subtle orbital lines that span across all three panels. */
+.cosmic-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* === BACK PANEL === */
+.panel-back {
+  position: relative;
+  padding: 22mm 16mm 18mm 14mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+}
+.back-blurb {
+  margin-top: 18mm;
+  font-family: var(--f-body);
+  font-size: 10.5pt;
+  line-height: 1.95;
+  color: rgba(244, 241, 234, 0.78);
+  text-align: justify;
+  max-width: 120mm;
+}
+.back-blurb .blurb-lead {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 11.5pt;
+  color: var(--brass-glow);
+  margin-bottom: 4mm;
+  display: block;
+}
+.back-meta {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8mm;
+}
+.back-meta-left {
+  font-family: var(--f-head);
+  font-size: 8.5pt;
+  color: rgba(244, 241, 234, 0.55);
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+}
+.back-meta-left .meta-strong {
+  color: var(--brass-glow);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.back-meta-left .meta-line { display: block; margin: 1mm 0; }
+.back-meta-left .meta-contact {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: var(--f-head);
+  font-weight: 400;
+  font-size: 9pt;
+  color: rgba(244, 241, 234, 0.85);
+  margin-top: 2mm;
+}
+.back-barcode {
+  width: 32mm;
+  height: 24mm;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.5mm 2mm;
+  position: relative;
+}
+.back-barcode .barcode-bars {
+  width: 100%;
+  height: 16mm;
+  background-image: repeating-linear-gradient(
+    to right,
+    #1B1A17 0, #1B1A17 0.4mm,
+    transparent 0.4mm, transparent 0.7mm,
+    #1B1A17 0.7mm, #1B1A17 1.0mm,
+    transparent 1.0mm, transparent 1.4mm,
+    #1B1A17 1.4mm, #1B1A17 1.7mm,
+    transparent 1.7mm, transparent 2.2mm
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.back-barcode .barcode-num {
+  font-family: 'IBM Plex Sans Arabic', monospace;
+  font-size: 6pt;
+  color: var(--ink);
+  letter-spacing: 0.1em;
+  margin-top: 1mm;
+  direction: ltr;
+}
+
+/* === SPINE === */
+.panel-spine {
+  position: relative;
+  background: var(--night-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  border-inline-start: 0.3pt solid rgba(184, 153, 104, 0.2);
+  border-inline-end: 0.3pt solid rgba(184, 153, 104, 0.2);
+}
+.spine-content {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  display: flex;
+  align-items: center;
+  gap: 18mm;
+  font-family: var(--f-display);
+  color: var(--brass-glow);
+}
+.spine-title {
+  font-size: 12pt;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+}
+.spine-author {
+  font-size: 8pt;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--brass);
+}
+.spine-mark {
+  position: absolute;
+  top: 12mm;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4mm;
+  height: 4mm;
+  opacity: 0.6;
+}
+
+/* === FRONT PANEL === */
+.panel-front {
+  position: relative;
+  padding: 26mm 18mm 22mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
+.front-publisher {
+  font-family: var(--f-head);
+  font-size: 9pt;
+  font-weight: 400;
+  letter-spacing: 0.5em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 28mm;
+}
+.front-title-block {
+  margin: 0 auto;
+  max-width: 110mm;
+  position: relative;
+  z-index: 2;
+}
+.front-title {
+  font-family: var(--f-display);
+  font-size: 56pt;
+  font-weight: 500;
+  color: var(--paper);
+  line-height: 1.1;
+  letter-spacing: 0;
+  margin: 0;
+  text-shadow: 0 0 24px rgba(228, 201, 136, 0.15);
+}
+.front-title-rule {
+  width: 32mm;
+  height: 0.6pt;
+  background: var(--brass);
+  margin: 10mm auto;
+  position: relative;
+}
+.front-title-rule::before,
+.front-title-rule::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 2mm;
+  height: 2mm;
+  background: var(--brass-glow);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.front-title-rule::before { right: -5mm; }
+.front-title-rule::after  { left:  -5mm; }
+.front-subtitle {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 14pt;
+  color: rgba(244, 241, 234, 0.6);
+  letter-spacing: 0.04em;
+  margin-top: 2mm;
+}
+.front-author {
+  margin-top: auto;
+  font-family: var(--f-head);
+  font-size: 13pt;
+  font-weight: 500;
+  color: var(--paper);
+  letter-spacing: 0.1em;
+}
+.front-author-role {
+  font-family: var(--f-body);
+  font-size: 9.5pt;
+  color: var(--brass);
+  margin-top: 2mm;
+  letter-spacing: 0.2em;
+}
+
+/* === ORBITAL DECORATIONS === */
+/* Central focal point on the front cover — a distant warm light */
+.warm-light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70mm;
+  height: 70mm;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(228, 201, 136, 0.18) 0%,
+    rgba(228, 201, 136, 0.08) 30%,
+    rgba(228, 201, 136, 0.03) 60%,
+    transparent 75%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Subtle paper-grain texture overlay */
+.paper-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image:
+    radial-gradient(circle at 25% 30%, rgba(255,255,255,0.15) 0.5px, transparent 1px),
+    radial-gradient(circle at 75% 70%, rgba(255,255,255,0.10) 0.5px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0.5px, transparent 1px);
+  background-size: 3mm 3mm, 5mm 5mm, 7mm 7mm;
+  mix-blend-mode: overlay;
+}
+</style>
+</head>
+<body>
+
+<div class="cover-spread">
+
+  <!-- Continuous cosmic background spanning all three panels -->
+  <svg class="cosmic-bg" viewBox="0 0 3180 2350" preserveAspectRatio="xMidYMid slice"
+       xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="nightGrad" cx="50%" cy="50%" r="65%">
+        <stop offset="0%"   stop-color="#181B22"/>
+        <stop offset="55%"  stop-color="#0E1116"/>
+        <stop offset="100%" stop-color="#07090C"/>
+      </radialGradient>
+      <radialGradient id="warmGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"   stop-color="#E4C988" stop-opacity="0.35"/>
+        <stop offset="40%"  stop-color="#B89968" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#8C6B3F" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Base night -->
+    <rect width="3180" height="2350" fill="url(#nightGrad)"/>
+
+    <!-- Distant warm light source — center of the front panel -->
+    <circle cx="2370" cy="1175" r="380" fill="url(#warmGlow)"/>
+
+    <!-- Concentric orbital rings centered on the front panel -->
+    <g fill="none" stroke="#B89968" stroke-opacity="0.22">
+      <circle cx="2370" cy="1175" r="980" stroke-width="0.6"/>
+      <circle cx="2370" cy="1175" r="760" stroke-width="0.5"/>
+      <circle cx="2370" cy="1175" r="560" stroke-width="0.5"/>
+      <circle cx="2370" cy="1175" r="380" stroke-width="0.4"/>
+      <circle cx="2370" cy="1175" r="220" stroke-width="0.4"/>
+      <circle cx="2370" cy="1175" r="100" stroke-width="0.5"/>
+    </g>
+
+    <!-- Elliptical orbits at varying angles — physics-like trajectories -->
+    <g fill="none" stroke="#B89968" stroke-opacity="0.18" stroke-width="0.4">
+      <ellipse cx="2370" cy="1175" rx="1100" ry="320" transform="rotate(15 2370 1175)"/>
+      <ellipse cx="2370" cy="1175" rx="1100" ry="420" transform="rotate(-25 2370 1175)"/>
+      <ellipse cx="2370" cy="1175" rx="900"  ry="180" transform="rotate(50 2370 1175)"/>
+      <ellipse cx="2370" cy="1175" rx="900"  ry="260" transform="rotate(-65 2370 1175)"/>
+    </g>
+
+    <!-- Faint orbital path traces extending into back panel -->
+    <g fill="none" stroke="#8C6B3F" stroke-opacity="0.12" stroke-width="0.3">
+      <ellipse cx="1590" cy="1175" rx="1500" ry="450" transform="rotate(8 1590 1175)"/>
+      <ellipse cx="1590" cy="1175" rx="1300" ry="380" transform="rotate(-12 1590 1175)"/>
+      <circle cx="810" cy="1175" r="280" stroke-dasharray="2 4"/>
+      <circle cx="810" cy="1175" r="180"/>
+    </g>
+
+    <!-- Tiny particles / stars scattered across the spread -->
+    <g fill="#E4C988">
+      <circle cx="450"  cy="280"  r="1.2" opacity="0.6"/>
+      <circle cx="980"  cy="420"  r="0.8" opacity="0.4"/>
+      <circle cx="1200" cy="180"  r="1.0" opacity="0.5"/>
+      <circle cx="1750" cy="320"  r="0.7" opacity="0.4"/>
+      <circle cx="2100" cy="260"  r="1.4" opacity="0.7"/>
+      <circle cx="2650" cy="380"  r="0.9" opacity="0.5"/>
+      <circle cx="2980" cy="220"  r="1.0" opacity="0.5"/>
+      <circle cx="380"  cy="1850" r="0.8" opacity="0.4"/>
+      <circle cx="1150" cy="1980" r="1.2" opacity="0.6"/>
+      <circle cx="1850" cy="2050" r="0.9" opacity="0.5"/>
+      <circle cx="2480" cy="1900" r="1.0" opacity="0.5"/>
+      <circle cx="2850" cy="2020" r="0.7" opacity="0.4"/>
+      <circle cx="650"  cy="1100" r="0.6" opacity="0.3"/>
+      <circle cx="1320" cy="900"  r="0.8" opacity="0.4"/>
+      <circle cx="2820" cy="1300" r="0.7" opacity="0.4"/>
+    </g>
+
+    <!-- Small orbital bodies on the front panel -->
+    <g>
+      <circle cx="2370" cy="195"  r="3"   fill="#E4C988"/>
+      <circle cx="3130" cy="1175" r="2.5" fill="#B89968"/>
+      <circle cx="2370" cy="2155" r="2"   fill="#8C6B3F"/>
+      <circle cx="1610" cy="1175" r="2"   fill="#B89968" opacity="0.7"/>
+    </g>
+
+    <!-- A faint horizontal hairline rule across the spread at top -->
+    <line x1="0" y1="180" x2="3180" y2="180"
+          stroke="#B89968" stroke-opacity="0.18" stroke-width="0.4"/>
+    <line x1="0" y1="2170" x2="3180" y2="2170"
+          stroke="#B89968" stroke-opacity="0.18" stroke-width="0.4"/>
+
+  </svg>
+
+  <!-- === BACK PANEL === -->
+  <div class="panel-back">
+    <div class="back-blurb">
+      <span class="blurb-lead">لو كان الفقد قانونًا فيزيائيًا،</span>
+      لكان ينصّ على أن: لا شيء يُفنى، لكن كل شيء يتغيّر.
+      في «انتروبيا الحنين»، تأخذنا شذى ياسر الجوبحي في رحلة بين أكوان متعددة،
+      حيث تبحث الابنة عن أبيها الفيزيائي في كل خطٍّ من خطوط دفتره الأزرق —
+      كونٌ حيث لم يمت، وآخر حيث لم تُولد، وثالثٌ حيث صار هو الطفل وهي الأم.
+      بين معادلات الجاذبية وثبات الطاقة، تكتب الرواية حنينًا لا يتحلل،
+      وحنانًا أخطر من أيّ شيء.
+    </div>
+
+    <div class="back-meta">
+      <div class="back-meta-left">
+        <span class="meta-line meta-strong">شذى ياسر الجوبحي</span>
+        <span class="meta-line">رواية أدبية · الطبعة الأولى ٢٠٢٦</span>
+        <span class="meta-line">اليمن</span>
+        <span class="meta-contact">+967 775 863 594</span>
+      </div>
+      <div class="back-barcode">
+        <div class="barcode-bars"></div>
+        <div class="barcode-num">9 781234 567890</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === SPINE === -->
+  <div class="panel-spine">
+    <svg class="spine-mark" viewBox="0 0 24 24" fill="none" stroke="#B89968" stroke-width="1.2">
+      <circle cx="12" cy="12" r="9"/>
+      <circle cx="12" cy="12" r="3" fill="#B89968" stroke="none"/>
+    </svg>
+    <div class="spine-content">
+      <div class="spine-title">انتروبيا الحنين</div>
+      <div class="spine-author">شذى ياسر الجوبحي</div>
+    </div>
+  </div>
+
+  <!-- === FRONT PANEL === -->
+  <div class="panel-front">
+    <div class="warm-light"></div>
+    <div class="paper-grain"></div>
+
+    <div class="front-publisher">رواية</div>
+
+    <div class="front-title-block">
+      <h1 class="front-title">انتروبيا<br>الحنين</h1>
+      <div class="front-title-rule"></div>
+      <div class="front-subtitle">رواية</div>
+    </div>
+
+    <div>
+      <div class="front-author">شذى ياسر الجوبحي</div>
+      <div class="front-author-role">اليمن</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

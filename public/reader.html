@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قراءة — انتروبيا الحنين</title>
+<meta name="description" content="اقرأ رواية انتروبيا الحنين لشذى ياسر الجوبحي مباشرة على المتصفح.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;700&family=Reem+Kufi:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* Theme: parchment (default light) */
+  --bg:        #F4F1EA;
+  --bg-soft:   #EFEBE1;
+  --ink:       #1B1A17;
+  --ink-soft:  #4A463E;
+  --ink-mute:  #8A847A;
+  --rule:      #D9D3C5;
+  --brass:     #8C6B3F;
+  --brass-soft:#B89968;
+  --brass-glow:#E4C988;
+  --card:      #ECE7DB;
+  --night:     #0E1116;
+
+  --f-display: 'Reem Kufi', 'IBM Plex Sans Arabic', serif;
+  --f-head:    'IBM Plex Sans Arabic', 'Noto Naskh Arabic', sans-serif;
+  --f-body:    'Noto Naskh Arabic', 'IBM Plex Sans Arabic', serif;
+  --f-quote:   'Amiri', 'Noto Naskh Arabic', serif;
+
+  --reading-size: 19px;
+  --reading-lh: 1.95;
+  --max-read-width: 720px;
+}
+
+/* Theme: night */
+html.theme-night {
+  --bg:        #14161B;
+  --bg-soft:   #1A1D23;
+  --ink:       #E8E4D8;
+  --ink-soft:  #B8B3A6;
+  --ink-mute:  #7A7568;
+  --rule:      #2A2D33;
+  --brass:     #B89968;
+  --brass-soft:#8C6B3F;
+  --brass-glow:#E4C988;
+  --card:      #1F2228;
+  --night:     #0E1116;
+}
+
+/* Theme: sepia */
+html.theme-sepia {
+  --bg:        #F0E6D2;
+  --bg-soft:   #E8DCC4;
+  --ink:       #3D2F1F;
+  --ink-soft:  #5A4632;
+  --ink-mute:  #8B7355;
+  --rule:      #C9B896;
+  --brass:     #8C5A2B;
+  --brass-soft:#B8845A;
+  --brass-glow:#D4A574;
+  --card:      #E5D9C0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--reading-size);
+  line-height: var(--reading-lh);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ============ TOP BAR ============ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  backdrop-filter: blur(10px);
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.topbar-logo {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--brass);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.topbar-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--rule);
+}
+.topbar-chapter-label {
+  font-family: var(--f-head);
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  color: var(--ink-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.icon-btn:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+.icon-btn svg { width: 18px; height: 18px; }
+.icon-btn.active {
+  background: var(--brass);
+  color: var(--bg);
+  border-color: var(--brass);
+}
+
+/* Reading size buttons */
+.size-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.size-btn {
+  background: var(--bg);
+  border: none;
+  padding: 0 12px;
+  height: 36px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-family: var(--f-head);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.size-btn:hover { color: var(--brass); }
+.size-btn.small { font-size: 12px; }
+.size-btn.medium { font-size: 14px; border-inline-start: 1px solid var(--rule); border-inline-end: 1px solid var(--rule); }
+.size-btn.large { font-size: 16px; }
+
+/* ============ PROGRESS BAR ============ */
+.progress-bar {
+  position: fixed;
+  top: 60px;
+  inset-inline: 0;
+  height: 2px;
+  background: var(--rule);
+  z-index: 99;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brass), var(--brass-glow));
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* ============ READER LAYOUT ============ */
+.reader-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: calc(100vh - 60px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============ SIDEBAR (TOC) ============ */
+.sidebar {
+  border-inline-end: 1px solid var(--rule);
+  padding: 32px 24px;
+  position: sticky;
+  top: 62px;
+  height: calc(100vh - 62px);
+  overflow-y: auto;
+  background: var(--bg);
+}
+.sidebar-title {
+  font-family: var(--f-head);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+.toc-item:hover {
+  background: var(--bg-soft);
+  color: var(--ink);
+}
+.toc-item.active {
+  background: var(--card);
+  color: var(--brass);
+  font-weight: 500;
+}
+.toc-num {
+  font-family: var(--f-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--brass-soft);
+  direction: ltr;
+  width: 32px;
+  text-align: center;
+}
+.toc-item.active .toc-num { color: var(--brass); }
+.toc-text {
+  font-family: var(--f-head);
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+}
+.toc-item-meta {
+  font-family: var(--f-body);
+  font-size: 11px;
+  color: var(--ink-mute);
+  margin-top: 2px;
+}
+.toc-section-label {
+  font-family: var(--f-head);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-mute);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 24px 0 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ============ MAIN READING AREA ============ */
+.reading-area {
+  padding: 60px 64px 120px;
+  max-width: var(--max-read-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Preface view */
+.preface-view { text-align: center; }
+.preface-epigraph {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  max-width: 580px;
+  margin: 0 auto 48px;
+  padding: 24px 0;
+  position: relative;
+}
+.preface-epigraph::before,
+.preface-epigraph::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--brass);
+  margin: 20px auto;
+  opacity: 0.6;
+}
+.preface-title {
+  font-family: var(--f-display);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.08em;
+  margin-bottom: 48px;
+}
+.preface-body p {
+  text-align: justify;
+  text-indent: 1.5em;
+  margin-bottom: 1em;
+}
+.preface-sign {
+  margin-top: 48px;
+  font-family: var(--f-quote);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.preface-sign .sig-name {
+  display: block;
+  font-family: var(--f-display);
+  font-style: normal;
+  font-size: 20px;
+  color: var(--brass);
+  margin-bottom: 4px;
+}
+
+/* Chapter opener */
+.chapter-opener {
+  text-align: center;
+  margin-bottom: 64px;
+  padding-top: 40px;
+  position: relative;
+}
+.chapter-opener-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+.chapter-opener-num {
+  font-family: var(--f-display);
+  font-size: 120px;
+  font-weight: 600;
+  color: var(--brass);
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: 8px;
+  direction: ltr;
+}
+.chapter-opener-label {
+  font-family: var(--f-head);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  color: var(--brass);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.chapter-opener-title {
+  font-family: var(--f-display);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+  margin: 16px auto 24px;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+}
+.chapter-opener-rule {
+  width: 60px;
+  height: 1px;
+  background: var(--brass);
+  margin: 0 auto 32px;
+}
+.chapter-opener-epigraph {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 540px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Reading content */
+.reading-content p {
+  font-family: var(--f-body);
+  font-size: var(--reading-size);
+  line-height: var(--reading-lh);
+  color: var(--ink);
+  text-align: justify;
+  text-justify: inter-word;
+  margin: 0 0 1em;
+  text-indent: 1.5em;
+  orphans: 3;
+  widows: 3;
+}
+.reading-content p.no-indent { text-indent: 0; }
+
+.reading-content .scene-break {
+  text-align: center;
+  margin: 32px 0;
+  break-inside: avoid;
+}
+.reading-content .scene-break svg {
+  width: 60px;
+  height: 12px;
+  opacity: 0.5;
+}
+
+.reading-content .voice {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: calc(var(--reading-size) * 0.97);
+  line-height: 1.9;
+  color: var(--ink);
+  margin: 0.8em 0;
+  text-indent: 0;
+  padding-inline-start: 1.2em;
+  border-inline-start: 2px solid var(--rule);
+}
+
+.reading-content .letter {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: calc(var(--reading-size) * 0.95);
+  line-height: 1.95;
+  color: var(--ink-soft);
+  background: var(--bg-soft);
+  border-inline-start: 2px solid var(--brass);
+  padding: 1em 1.4em;
+  margin: 1.2em 0;
+  text-indent: 0;
+  break-inside: avoid;
+}
+
+.reading-content .whisper {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: var(--reading-size);
+  line-height: 1.95;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 1.5em auto;
+  max-width: 540px;
+  padding: 0 1em;
+  text-indent: 0;
+  break-inside: avoid;
+}
+
+/* ============ NAVIGATION ============ */
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+  gap: 16px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-family: var(--f-head);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+.nav-btn:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+  background: var(--bg-soft);
+}
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.nav-btn-label {
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.nav-btn-title {
+  font-size: 14px;
+  color: inherit;
+  margin-top: 2px;
+}
+
+/* ============ END-OF-BOOK ============ */
+.end-of-book {
+  text-align: center;
+  padding: 80px 0;
+  margin-top: 80px;
+  border-top: 1px solid var(--rule);
+}
+.end-of-book svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.4;
+  margin-bottom: 24px;
+}
+.end-of-book-text {
+  font-family: var(--f-quote);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+.end-of-book-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--brass);
+  color: var(--bg);
+  text-decoration: none;
+  font-family: var(--f-head);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+.end-of-book-back:hover { background: var(--brass-glow); }
+
+/* ============ MOBILE TOGGLE ============ */
+.sidebar-toggle {
+  display: none;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 960px) {
+  .reader-shell {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: fixed;
+    inset-inline-start: 0;
+    top: 60px;
+    width: 280px;
+    height: calc(100vh - 60px);
+    background: var(--bg);
+    z-index: 95;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+  }
+  html[dir="rtl"] .sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-toggle {
+    display: inline-flex;
+  }
+  .reading-area {
+    padding: 32px 24px 80px;
+  }
+  .chapter-opener-title { font-size: 30px; }
+  .chapter-opener-num { font-size: 80px; }
+  .preface-title { font-size: 28px; }
+  .topbar-chapter-label { display: none; }
+  .reading-content .voice,
+  .reading-content .letter {
+    font-size: calc(var(--reading-size) * 0.92);
+  }
+}
+
+@media (max-width: 540px) {
+  .reading-area { padding: 24px 18px 80px; }
+  .topbar { padding: 10px 14px; }
+  .topbar-logo { font-size: 15px; }
+  .icon-btn { width: 32px; height: 32px; }
+  .icon-btn svg { width: 16px; height: 16px; }
+  .chapter-opener-num { font-size: 60px; }
+  .chapter-opener-title { font-size: 24px; }
+  .preface-title { font-size: 22px; }
+  .nav-btn { padding: 10px 16px; }
+  .nav-btn-label { display: none; }
+  /* Smaller size buttons on mobile */
+  .size-btn { padding: 0 8px; }
+}
+
+/* Overlay when sidebar open on mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 90;
+}
+.sidebar-overlay.show {
+  display: block;
+}
+</style>
+</head>
+<body class="theme-parchment">
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="icon-btn sidebar-toggle" id="sidebarToggle" aria-label="الفهرس">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <a class="topbar-logo" href="/">انتروبيا الحنين</a>
+    <span class="topbar-divider"></span>
+    <span class="topbar-chapter-label" id="chapterLabel">المقدمة</span>
+  </div>
+  <div class="topbar-right">
+    <!-- Font size -->
+    <div class="size-control" role="group" aria-label="حجم الخط">
+      <button class="size-btn small" data-size="16" aria-label="صغير">أ−</button>
+      <button class="size-btn medium active" data-size="19" aria-label="متوسط">أ</button>
+      <button class="size-btn large" data-size="22" aria-label="كبير">أ+</button>
+    </div>
+    <!-- Themes -->
+    <button class="icon-btn theme-btn" data-theme="parchment" aria-label="وضع الورق">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 3a9 9 0 000 18"/>
+      </svg>
+    </button>
+    <button class="icon-btn theme-btn" data-theme="sepia" aria-label="وضع سيبيا">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+    </button>
+    <button class="icon-btn theme-btn" data-theme="night" aria-label="الوضع الليلي">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<!-- OVERLAY for mobile sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- READER SHELL -->
+<div class="reader-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">الفهرس</div>
+
+    <a class="toc-item" data-section="preface">
+      <div class="toc-num">٠</div>
+      <div>
+        <div class="toc-text">المقدمة</div>
+        <div class="toc-item-meta">افتتاحية</div>
+      </div>
+    </a>
+
+    <div class="toc-section-label">الفصول</div>
+    <div id="chapterToc"></div>
+
+    <div class="toc-section-label">التنزيل</div>
+    <a class="toc-item" href="Print_Ready_Entropy_of_Longing.pdf" download>
+      <div class="toc-num">⤓</div>
+      <div>
+        <div class="toc-text">نسخة الطباعة PDF</div>
+        <div class="toc-item-meta">6×9 inch · 24 صفحة</div>
+      </div>
+    </a>
+    <a class="toc-item" href="Digital_Reading_Entropy_of_Longing.pdf" download>
+      <div class="toc-num">⤓</div>
+      <div>
+        <div class="toc-text">نسخة رقمية PDF</div>
+        <div class="toc-item-meta">A5 · للجوال</div>
+      </div>
+    </a>
+    <a class="toc-item" href="/">
+      <div class="toc-num">←</div>
+      <div>
+        <div class="toc-text">العودة للرئيسية</div>
+        <div class="toc-item-meta">صفحة الكتاب</div>
+      </div>
+    </a>
+  </aside>
+
+  <!-- READING AREA -->
+  <main class="reading-area" id="readingArea">
+    <!-- Content rendered by JS -->
+  </main>
+
+</div>
+
+<script>
+// ============================================================
+// Reader state & rendering
+// ============================================================
+let bookData = null;
+let currentSection = 'preface';  // 'preface' or chapter index 0,1,2
+let savedScrollPosition = {};
+
+const STORAGE_KEY = 'entropy-reader-state';
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    if (s.section !== undefined) currentSection = s.section;
+    if (s.theme) applyTheme(s.theme);
+    if (s.fontSize) applyFontSize(s.fontSize);
+  } catch (e) {}
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    section: currentSection,
+    theme: document.documentElement.className.match(/theme-(\w+)/)?.[1] || 'parchment',
+    fontSize: parseInt(getComputedStyle(document.documentElement).getPropertyValue('--reading-size')) || 19,
+  }));
+}
+
+// ============================================================
+// Theme & font size
+// ============================================================
+function applyTheme(theme) {
+  document.documentElement.className = 'theme-' + theme;
+  document.querySelectorAll('.theme-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === theme);
+  });
+  saveState();
+}
+
+function applyFontSize(px) {
+  document.documentElement.style.setProperty('--reading-size', px + 'px');
+  const lh = px <= 17 ? 1.85 : px >= 21 ? 2.05 : 1.95;
+  document.documentElement.style.setProperty('--reading-lh', lh);
+  document.querySelectorAll('.size-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.size) === px);
+  });
+  saveState();
+}
+
+// ============================================================
+// Render
+// ============================================================
+function renderChapterToc() {
+  const container = document.getElementById('chapterToc');
+  container.innerHTML = '';
+  bookData.chapters.forEach((ch, i) => {
+    const item = document.createElement('a');
+    item.className = 'toc-item';
+    item.dataset.section = i;
+    item.innerHTML = `
+      <div class="toc-num">${ch.num}</div>
+      <div>
+        <div class="toc-text">${ch.title.split('—')[0].trim()}</div>
+        <div class="toc-item-meta">${ch.blocks.filter(b => b.type === 'p').length} فقرة</div>
+      </div>
+    `;
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigateTo(i);
+    });
+    container.appendChild(item);
+  });
+}
+
+function renderPreface() {
+  const area = document.getElementById('readingArea');
+  const prefaceP = bookData.preface.map(b => `<p${b.text === bookData.preface[0].text ? ' class="no-indent"' : ''}>${b.text}</p>`).join('');
+  area.innerHTML = `
+    <article class="preface-view">
+      <div class="preface-epigraph">${bookData.epigraph.replace(/،/g, '،<br>')}</div>
+      <h1 class="preface-title">مقدمة</h1>
+      <div class="preface-body">
+        ${prefaceP}
+      </div>
+      <div class="preface-sign">
+        <span class="sig-name">${bookData.preface_sign.name}</span>
+        ${bookData.preface_sign.meta}
+      </div>
+    </article>
+    ${renderChapterNav('preface')}
+  `;
+  document.getElementById('chapterLabel').textContent = 'المقدمة';
+  updateActiveToc('preface');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  bindNav();
+}
+
+function renderChapter(idx) {
+  const ch = bookData.chapters[idx];
+  const area = document.getElementById('readingArea');
+
+  let blocksHtml = '';
+  for (const b of ch.blocks) {
+    if (b.type === 'p') {
+      blocksHtml += `<p>${b.text}</p>`;
+    } else if (b.type === 'scene') {
+      blocksHtml += `<div class="scene-break">
+        <svg viewBox="0 0 60 12" fill="none" stroke="currentColor" stroke-width="0.8">
+          <circle cx="6" cy="6" r="1.5"/>
+          <line x1="14" y1="6" x2="26" y2="6"/>
+          <circle cx="30" cy="6" r="2"/>
+          <line x1="34" y1="6" x2="46" y2="6"/>
+          <circle cx="54" cy="6" r="1.5"/>
+        </svg>
+      </div>`;
+    } else if (b.type === 'voice') {
+      blocksHtml += `<div class="voice">${b.text}</div>`;
+    } else if (b.type === 'letter') {
+      blocksHtml += `<div class="letter">${b.text}</div>`;
+    } else if (b.type === 'whisper') {
+      blocksHtml += `<div class="whisper">${b.text.replace(/\./g, '.<br>').replace(/!/g, '!<br>')}</div>`;
+    }
+  }
+
+  area.innerHTML = `
+    <article>
+      <header class="chapter-opener">
+        <svg class="chapter-opener-orbit" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.4">
+          <circle cx="100" cy="100" r="95"/>
+          <circle cx="100" cy="100" r="72"/>
+          <circle cx="100" cy="100" r="48"/>
+          <ellipse cx="100" cy="100" rx="95" ry="40" transform="rotate(15 100 100)"/>
+          <ellipse cx="100" cy="100" rx="95" ry="40" transform="rotate(-25 100 100)"/>
+          <circle cx="100" cy="5" r="2" fill="currentColor" stroke="none"/>
+        </svg>
+        <div class="chapter-opener-num">${ch.num}</div>
+        <div class="chapter-opener-label">الفصل ${['الأول','الثاني','الثالث'][idx]}</div>
+        <h1 class="chapter-opener-title">${ch.title}</h1>
+        <div class="chapter-opener-rule"></div>
+        <div class="chapter-opener-epigraph">${ch.epigraph}</div>
+      </header>
+      <div class="reading-content">
+        ${blocksHtml}
+      </div>
+    </article>
+    ${renderChapterNav(idx)}
+  `;
+  document.getElementById('chapterLabel').textContent = ch.title.split('—')[0].trim();
+  updateActiveToc(idx);
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  bindNav();
+}
+
+function renderEndOfBook() {
+  const area = document.getElementById('readingArea');
+  area.innerHTML = `
+    <div class="end-of-book">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="12" r="9"/>
+        <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
+        <line x1="12" y1="0" x2="12" y2="6"/>
+        <line x1="12" y1="18" x2="12" y2="24"/>
+        <line x1="0" y1="12" x2="6" y2="12"/>
+        <line x1="18" y1="12" x2="24" y2="12"/>
+      </svg>
+      <div class="end-of-book-text">
+        تمّت الرواية.<br>
+        لا شيء يُفنى، لكن كل شيء يتغيّر.
+      </div>
+      <a href="#" class="end-of-book-back" id="backToStart">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12l9-9 9 9M5 10v10h14V10"/>
+        </svg>
+        العودة للبداية
+      </a>
+    </div>
+  `;
+  document.getElementById('chapterLabel').textContent = 'النهاية';
+  document.getElementById('backToStart').addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('preface');
+  });
+}
+
+function renderChapterNav(current) {
+  let prev, next, prevTitle, nextTitle;
+
+  if (current === 'preface') {
+    prev = null;
+    next = 0;
+    nextTitle = bookData.chapters[0].title.split('—')[0].trim();
+  } else if (typeof current === 'number') {
+    if (current === 0) {
+      prev = 'preface';
+      prevTitle = 'المقدمة';
+    } else {
+      prev = current - 1;
+      prevTitle = bookData.chapters[current - 1].title.split('—')[0].trim();
+    }
+    if (current < bookData.chapters.length - 1) {
+      next = current + 1;
+      nextTitle = bookData.chapters[current + 1].title.split('—')[0].trim();
+    } else {
+      next = 'end';
+      nextTitle = 'تمّت الرواية';
+    }
+  } else if (current === 'end') {
+    prev = bookData.chapters.length - 1;
+    prevTitle = bookData.chapters[prev].title.split('—')[0].trim();
+    next = null;
+  }
+
+  return `
+    <nav class="chapter-nav">
+      <button class="nav-btn" data-nav="${prev}" ${prev === null ? 'disabled' : ''}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+        <div style="text-align: start;">
+          <div class="nav-btn-label">السابق</div>
+          <div class="nav-btn-title">${prevTitle || '—'}</div>
+        </div>
+      </button>
+      <button class="nav-btn" data-nav="${next}" ${next === null ? 'disabled' : ''}>
+        <div style="text-align: end;">
+          <div class="nav-btn-label">التالي</div>
+          <div class="nav-btn-title">${nextTitle || '—'}</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+    </nav>
+  `;
+}
+
+function bindNav() {
+  document.querySelectorAll('[data-nav]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.nav;
+      if (target === 'null') return;
+      navigateTo(target === 'preface' ? 'preface' : target === 'end' ? 'end' : parseInt(target));
+    });
+  });
+}
+
+function navigateTo(section) {
+  currentSection = section;
+  if (section === 'preface') {
+    renderPreface();
+  } else if (section === 'end') {
+    renderEndOfBook();
+  } else {
+    renderChapter(section);
+  }
+  saveState();
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+}
+
+function updateActiveToc(section) {
+  document.querySelectorAll('.toc-item').forEach(item => {
+    const s = item.dataset.section;
+    if (s === undefined) return;
+    const itemSection = s === 'preface' ? 'preface' : parseInt(s);
+    item.classList.toggle('active', itemSection === section);
+  });
+}
+
+// ============================================================
+// Progress bar
+// ============================================================
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+// ============================================================
+// Init
+// ============================================================
+async function init() {
+  // Load book data
+  try {
+    const res = await fetch('book-data.json');
+    bookData = await res.json();
+  } catch (e) {
+    document.getElementById('readingArea').innerHTML =
+      '<p style="text-align:center; padding:60px 0; color:var(--ink-mute)">تعذّر تحميل بيانات الرواية.</p>';
+    return;
+  }
+
+  loadState();
+  renderChapterToc();
+
+  // Default theme
+  if (!document.documentElement.className.match(/theme-/)) {
+    applyTheme('parchment');
+  }
+
+  // Render current section
+  if (currentSection === 'preface') {
+    renderPreface();
+  } else if (currentSection === 'end') {
+    renderEndOfBook();
+  } else if (typeof currentSection === 'number') {
+    renderChapter(currentSection);
+  } else {
+    renderPreface();
+  }
+
+  // Bind theme buttons
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
+  });
+
+  // Bind size buttons
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyFontSize(parseInt(btn.dataset.size)));
+  });
+
+  // Sidebar toggle (mobile)
+  document.getElementById('sidebarToggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('show');
+  });
+  document.getElementById('sidebarOverlay').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('show');
+  });
+
+  // Pre-render preface TOC item active state
+  if (currentSection === 'preface') updateActiveToc('preface');
+
+  // Progress bar
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowLeft') {
+      // Next in RTL = arrow left
+      const nav = document.querySelector('[data-nav]:not([disabled])');
+      // Find the "next" button (the one on the visual left in RTL = the second button)
+      const nextBtn = document.querySelectorAll('[data-nav]')[1];
+      if (nextBtn && !nextBtn.disabled) nextBtn.click();
+    } else if (e.key === 'ArrowRight') {
+      const prevBtn = document.querySelectorAll('[data-nav]')[0];
+      if (prevBtn && !prevBtn.disabled) prevBtn.click();
+    }
+  });
+}
+
+init();
+</script>
+
+</body>
+</html>
